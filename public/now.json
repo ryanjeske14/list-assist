@@ -1,0 +1,15 @@
+{
+    "version": 2,
+    "alias": "ryanjeske-list-assist",
+    "name": "list-assist",
+    "routes": [
+        {
+          "src": "^/static/(.*)",
+          "dest": "/static/$1"
+        },
+        {
+          "src": ".*",
+          "dest": "/index.html"
+        }
+    ]
+  }
