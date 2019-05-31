@@ -3,16 +3,39 @@ export default {
     {
       id: 1,
       name: "First Recipe",
-      instructions: "Recipe 1 instructions... First cook this, then cook that."
+      description: "Very Tasty 1",
+      instructions: "Recipe 1 instructions... First cook this, then cook that.",
+      ingredients: [
+        {
+          id: 5,
+          name: "eggs",
+          unit: "",
+          quantity: 2
+        },
+        {
+          id: 6,
+          name: "oregano",
+          unit: "TBSP",
+          quantity: 1 / 4
+        },
+        {
+          id: 7,
+          name: "cheese",
+          unit: "cups",
+          quantity: 1 / 4
+        }
+      ]
     },
     {
       id: 2,
       name: "Second Recipe",
+      description: "Very Tasty 2",
       instructions: "Recipe 2 instructions... First cook this, then cook that."
     },
     {
       id: 3,
       name: "Third Recipe",
+      description: "Very Tasty 3",
       instructions: "Recipe 3 instructions... First cook this, then cook that."
     }
   ],
@@ -20,56 +43,56 @@ export default {
     {
       id: 1,
       name: "cheese",
-      unitOfMeasurement: "cups",
+      unit: "cups",
       quantity: 1 / 4,
       recipeId: 3
     },
     {
       id: 2,
       name: "bread",
-      unitOfMeasurement: "slices",
+      unit: "slices",
       quantity: 2,
       recipeId: 3
     },
     {
       id: 3,
       name: "salt",
-      unitOfMeasurement: "tsp",
+      unit: "tsp",
       quantity: 2,
       recipeId: 3
     },
     {
       id: 4,
       name: "salt",
-      unitOfMeasurement: "tsp",
+      unit: "tsp",
       quantity: 1,
       recipeId: 2
     },
     {
       id: 1,
       name: "milk",
-      unitOfMeasurement: "cups",
+      unit: "cups",
       quantity: 2,
       recipeId: 2
     },
     {
       id: 5,
       name: "eggs",
-      unitOfMeasurement: "",
+      unit: "",
       quantity: 2,
       recipeId: 1
     },
     {
       id: 6,
       name: "oregano",
-      unitOfMeasurement: "TBSP",
+      unit: "TBSP",
       quantity: 1 / 4,
       recipeId: 1
     },
     {
       id: 7,
       name: "cheese",
-      unitOfMeasurement: "cups",
+      unit: "cups",
       quantity: 1 / 4,
       recipeId: 1
     }

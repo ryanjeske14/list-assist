@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import App from "../App/App";
 import AppContext from "../../AppContext";
 import { findSelected } from "../../function-helpers";
 
@@ -13,7 +12,7 @@ export default class SelectedRecipes extends Component {
     return (
       <ul>
         {selectedRecipes.map(recipe => (
-          <li>
+          <li key={recipe.id}>
             {recipe.name} x {recipe.quantity}
           </li>
         ))}

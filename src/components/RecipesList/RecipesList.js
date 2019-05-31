@@ -1,11 +1,17 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import AppContext from "../../AppContext";
+import "./RecipesList.css";
 
 export default class RecipesList extends Component {
   static contextType = AppContext;
 
-  handleClick = recipeId => {
+  handleAddToList = recipeId => {
     this.context.addToSelected(recipeId);
+  };
+
+  handleRemoveFromList = recipeId => {
+    this.context.removeFromSelected(recipeId);
   };
 
   render() {
@@ -14,9 +20,10 @@ export default class RecipesList extends Component {
       <ul>
         {recipes.map(recipe => (
           <li key={recipe.id}>
-            {recipe.name}
-            <button onClick={() => this.handleClick(recipe.id)}>
-              Add to List
+            <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
+            <button onClick={() => this.handleAddToList(recipe.id)}>+</button>
+            <button onClick={() => this.handleRemoveFromList(recipe.id)}>
+              -
             </button>
           </li>
         ))}

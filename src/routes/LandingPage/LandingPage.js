@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import "./LandingPage.css";
 import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
@@ -17,7 +18,7 @@ export default class LandingPage extends Component {
           </header>
           <p>
             No more spending time figuring out which groceries you need in order
-            to make your favorite recipes. With Lift Assist, your grocery list
+            to make your favorite recipes. With List Assist, your grocery list
             is made for you, giving you back time for the things that matter
             most.
           </p>
@@ -53,7 +54,9 @@ export default class LandingPage extends Component {
 
         <section>
           <header>
-            <h3>Get Started</h3>
+            <h2>
+              <Link to="/recipes">Get Started</Link>
+            </h2>
             <p>
               Register below to add and manage your own favorite recipes.
               There's no need to register if you'd just like to use the

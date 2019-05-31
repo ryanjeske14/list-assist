@@ -14,7 +14,8 @@ import STORE from "../../STORE";
 class App extends Component {
   state = {
     recipes: [],
-    selected: {}
+    selected: {},
+    recipeIngredients: []
   };
 
   handleAddToSelected = recipeId => {
@@ -25,9 +26,42 @@ class App extends Component {
     });
   };
 
+  handleRemoveFromSelected = recipeId => {
+    const selected = { ...this.state.selected };
+    if (selected[recipeId]) {
+      if (selected[recipeId] >= 2) {
+        selected[recipeId]--;
+      } else {
+        delete selected[recipeId];
+      }
+    }
+    this.setState({
+      selected
+    });
+  };
+
+  handleAddRecipe = recipe => {
+    this.setState({
+      recipes: [...this.state.recipes, recipe]
+    });
+  };
+
+  handleAddIngredients = ingredients => {
+    console.log(ingredients);
+    const recipeIngredients = [...this.state.recipeIngredients];
+    console.log(recipeIngredients);
+    for (const ingredient of ingredients) {
+      recipeIngredients.push(ingredient);
+    }
+    this.setState({
+      recipeIngredients
+    });
+  };
+
   componentDidMount() {
     this.setState({
-      recipes: STORE.recipes
+      recipes: STORE.recipes,
+      recipeIngredients: STORE.recipeIngredients
     });
   }
 
@@ -35,8 +69,11 @@ class App extends Component {
     const contextValue = {
       recipes: this.state.recipes,
       selected: this.state.selected,
-
-      addToSelected: this.handleAddToSelected
+      recipeIngredients: this.state.recipeIngredients,
+      addToSelected: this.handleAddToSelected,
+      removeFromSelected: this.handleRemoveFromSelected,
+      addRecipe: this.handleAddRecipe,
+      addIngredients: this.handleAddIngredients
     };
 
     return (
@@ -48,6 +85,8 @@ class App extends Component {
             <Route path={"/recipes"} component={RecipesPage} />
             <Route path={"/grocery-list"} component={GroceryListPage} />
             <Route path={"/add-recipe"} component={AddRecipePage} />
+            {/* <Route path={"/login"} component={AddRecipePage} />
+            <Route path={"/register"} component={AddRecipePage} /> */}
             <Route component={NotFoundPage} />
           </Switch>
         </main>
