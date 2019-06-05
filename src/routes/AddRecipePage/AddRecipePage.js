@@ -101,25 +101,31 @@ export default class AddRecipePage extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
+    const Fraction = require("fraction.js");
+    const ingredients = this.state.ingredients;
     const recipeId = Math.floor(Math.random() * 10000000);
+
+    ingredients.forEach(ingredient => {
+      ingredient.id = Math.floor(Math.random() * 10000000);
+      ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
+      ingredient.recipeId = recipeId;
+    });
+
     const recipe = (({ name, description, instructions }) => ({
       name,
       description,
       instructions
     }))(this.state);
     recipe.id = recipeId;
-    console.log(recipe);
+    recipe.ingredients = ingredients;
+
+    //console.log(recipe);
+
     this.context.addRecipe(recipe);
 
-    const ingredients = this.state.ingredients;
-    ingredients.forEach(ingredient => {
-      ingredient.id = Math.floor(Math.random() * 10000000);
-      ingredient.quantity = Number(ingredient.quantity);
-      ingredient.recipeId = recipeId;
-    });
-    console.log(ingredients);
+    //console.log(ingredients);
 
-    this.context.addIngredients(ingredients);
+    //this.context.addIngredients(ingredients);
 
     this.props.history.push("/recipes");
   }
@@ -144,7 +150,6 @@ export default class AddRecipePage extends Component {
             onChange={e => this.updateDescription(e.target.value)}
             minLength="3"
             maxLength="400"
-            required
           />
           <label htmlFor="instructions">Instructions</label>
           <textarea
@@ -152,7 +157,6 @@ export default class AddRecipePage extends Component {
             onChange={e => this.updateInstructions(e.target.value)}
             minLength="3"
             maxLength="4000"
-            required
           />
           <label>Ingredients</label>
           {this.createUI()}

@@ -1,15 +1,15 @@
 import React, { Component } from "react";
 import AppContext from "../../AppContext";
-import { findRecipe, findIngredients } from "../../function-helpers";
+import { findRecipe } from "../../function-helpers";
 
 export default class RecipePage extends Component {
   static contextType = AppContext;
 
   render() {
-    const { recipes, recipeIngredients } = this.context;
+    const { recipes } = this.context;
     const { recipeId } = this.props.match.params;
     const recipe = findRecipe(recipes, recipeId) || {};
-    const ingredients = findIngredients(recipeIngredients, recipeId);
+    const ingredients = recipe.ingredients || [];
 
     return (
       <section>

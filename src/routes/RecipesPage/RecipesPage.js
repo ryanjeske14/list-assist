@@ -13,6 +13,10 @@ export default class RecipesPage extends Component {
 
         <h2>Your Recipes</h2>
         <SelectedRecipes />
+
+        <Link to={`/grocery-list`}>
+          <button>Generage Grocery List</button>
+        </Link>
       </section>
     );
   }
