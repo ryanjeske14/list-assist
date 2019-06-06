@@ -4,6 +4,10 @@ import AppContext from "../../AppContext";
 export default class GroceryListPage extends Component {
   static contextType = AppContext;
 
+  handleClickBack = () => {
+    this.props.history.push("/recipes");
+  };
+
   render() {
     const Fraction = require("fraction.js");
     const { recipes, selected } = this.context;
@@ -41,6 +45,7 @@ export default class GroceryListPage extends Component {
             <li key={i}>{grocery}</li>
           ))}
         </ul>
+        <button onClick={() => this.handleClickBack()}>Back to Recipes</button>
       </section>
     );
   }

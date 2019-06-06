@@ -107,6 +107,8 @@ export default class AddRecipePage extends Component {
 
     ingredients.forEach(ingredient => {
       ingredient.id = Math.floor(Math.random() * 10000000);
+      ingredient.name = ingredient.name.trim();
+      ingredient.unit = ingredient.unit.trim();
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
       ingredient.recipeId = recipeId;
     });

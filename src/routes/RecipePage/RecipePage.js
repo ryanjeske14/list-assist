@@ -5,6 +5,10 @@ import { findRecipe } from "../../function-helpers";
 export default class RecipePage extends Component {
   static contextType = AppContext;
 
+  handleClickBack = () => {
+    this.props.history.push("/recipes");
+  };
+
   render() {
     const { recipes } = this.context;
     const { recipeId } = this.props.match.params;
@@ -26,6 +30,7 @@ export default class RecipePage extends Component {
         </ul>
         <h3>Instructions:</h3>
         <p>{recipe.instructions}</p>
+        <button onClick={() => this.handleClickBack()}>Back to Recipes</button>
       </section>
     );
   }
