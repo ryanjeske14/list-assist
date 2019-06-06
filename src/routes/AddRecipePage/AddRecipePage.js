@@ -47,17 +47,19 @@ export default class AddRecipePage extends Component {
           name="name"
           value={el.name || ""}
           onChange={this.handleChange.bind(this, i)}
-        />
-        <input
-          placeholder="Unit"
-          name="unit"
-          value={el.unit || ""}
-          onChange={this.handleChange.bind(this, i)}
+          required
         />
         <input
           placeholder="Quantity"
           name="quantity"
           value={el.quantity || ""}
+          onChange={this.handleChange.bind(this, i)}
+          required
+        />
+        <input
+          placeholder="Unit"
+          name="unit"
+          value={el.unit || ""}
           onChange={this.handleChange.bind(this, i)}
         />
         <input

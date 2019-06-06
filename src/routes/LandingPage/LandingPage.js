@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./LandingPage.css";
-import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
+// import RegistrationForm from "../../components/RegistrationForm/RegistrationForm";
 
 export default class LandingPage extends Component {
   render() {
@@ -57,13 +57,13 @@ export default class LandingPage extends Component {
             <h2>
               <Link to="/recipes">Get Started</Link>
             </h2>
-            <p>
+            {/* <p>
               Register below to add and manage your own favorite recipes.
               There's no need to register if you'd just like to use the
               pre-existing recipes on our site. Happy shopping!
-            </p>
+            </p> */}
           </header>
-          <RegistrationForm />
+          {/* <RegistrationForm /> */}
         </section>
       </main>
     );
