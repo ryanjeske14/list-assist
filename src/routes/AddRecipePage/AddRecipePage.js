@@ -16,6 +16,7 @@ export default class AddRecipePage extends Component {
       // descriptionValid: false,
       // instructionsValid: false,
       // validationMessages: {
+
       //   name: "",
       //   description: "",
       //   instructions: ""
