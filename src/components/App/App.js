@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-//import AppContext from "../AppContext";
 //import ErrorBoundary from "../ErrorBoundary";
 import LandingPage from "../../routes/LandingPage/LandingPage";
 import RecipesPage from "../../routes/RecipesPage/RecipesPage";
@@ -10,6 +9,11 @@ import AddRecipePage from "../../routes/AddRecipePage/AddRecipePage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import AppContext from "../../AppContext";
 import STORE from "../../STORE";
+import Header from "../Header/Header";
+import LoginPage from "../../routes/LoginPage/LoginPage";
+import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
+import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
+import PrivateRoute from "../Utils/PrivateRoute";
 
 class App extends Component {
   state = {
@@ -78,18 +82,26 @@ class App extends Component {
 
     return (
       <AppContext.Provider value={contextValue}>
-        <main className="App">
-          <Switch>
-            <Route exact path={"/"} component={LandingPage} />
-            <Route path={"/recipes/:recipeId"} component={RecipePage} />
-            <Route path={"/recipes"} component={RecipesPage} />
-            <Route path={"/grocery-list"} component={GroceryListPage} />
-            <Route path={"/add-recipe"} component={AddRecipePage} />
-            {/* <Route path={"/login"} component={AddRecipePage} />
-            <Route path={"/register"} component={AddRecipePage} /> */}
-            <Route component={NotFoundPage} />
-          </Switch>
-        </main>
+        <div className="App">
+          <header className="App__header">
+            <Header />
+          </header>
+          <main className="App">
+            <Switch>
+              <Route exact path={"/"} component={LandingPage} />
+              <Route path={"/recipes/:recipeId"} component={RecipePage} />
+              <Route path={"/recipes"} component={RecipesPage} />
+              <Route path={"/grocery-list"} component={GroceryListPage} />
+              <PrivateRoute path={"/add-recipe"} component={AddRecipePage} />
+              <PublicOnlyRoute path={"/login"} component={LoginPage} />
+              <PublicOnlyRoute
+                path={"/register"}
+                component={RegistrationPage}
+              />
+              <Route component={NotFoundPage} />
+            </Switch>
+          </main>
+        </div>
       </AppContext.Provider>
     );
   }

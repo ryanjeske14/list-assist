@@ -1,28 +1,61 @@
 import React, { Component } from "react";
-import "./RegistrationForm.css";
+import { Button, Input, Required } from "../Utils/Utils";
+import AuthApiService from "../../services/auth-api-service";
 
 export default class RegistrationForm extends Component {
+  static defaultProps = {
+    onRegistrationSuccess: () => {}
+  };
+
+  state = { error: null };
+
+  handleSubmit = ev => {
+    ev.preventDefault();
+    const { user_name, password } = ev.target;
+
+    this.setState({ error: null });
+    AuthApiService.postUser({
+      user_name: user_name.value,
+      password: password.value
+    })
+      .then(user => {
+        user_name.value = "";
+        password.value = "";
+        this.props.onRegistrationSuccess();
+      })
+      .catch(res => {
+        this.setState({ error: res.error });
+      });
+  };
+
   render() {
+    const { error } = this.state;
     return (
-      <form className="signup-form">
-        <div>
-          <label htmlFor="full-name">Full name</label>
-          <input
-            placeholder="e.g., John Doe"
+      <form className="RegistrationForm" onSubmit={this.handleSubmit}>
+        <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div className="user_name">
+          <label htmlFor="RegistrationForm__user_name">
+            User name <Required />
+          </label>
+          <Input
+            name="user_name"
             type="text"
-            name="full-name"
-            id="full-name"
+            required
+            id="RegistrationForm__user_name"
           />
         </div>
-        <div>
-          <label htmlFor="username">User name</label>
-          <input type="text" name="username" id="username" />
+        <div className="password">
+          <label htmlFor="RegistrationForm__password">
+            Password <Required />
+          </label>
+          <Input
+            name="password"
+            type="password"
+            required
+            id="RegistrationForm__password"
+          />
         </div>
-        <div>
-          <label htmlFor="password">Password</label>
-          <input type="password" name="password" id="password" />
-        </div>
-        <button type="submit">Sign Up</button>
+        <Button type="submit">Register</Button>
       </form>
     );
   }
