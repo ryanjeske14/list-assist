@@ -14,12 +14,13 @@ import LoginPage from "../../routes/LoginPage/LoginPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
 import PublicOnlyRoute from "../Utils/PublicOnlyRoute";
 import PrivateRoute from "../Utils/PrivateRoute";
+import RecipesApiService from "../../services/recipes-api-service";
 
 class App extends Component {
   state = {
     recipes: [],
-    selected: {},
-    recipeIngredients: []
+    selected: {}
+    // recipeIngredients: []
   };
 
   handleAddToSelected = recipeId => {
@@ -63,10 +64,9 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.setState({
-      recipes: STORE.recipes,
-      recipeIngredients: STORE.recipeIngredients
-    });
+    RecipesApiService.getRecipes().then(recipes =>
+      this.setState({ recipes: recipes })
+    );
   }
 
   render() {
