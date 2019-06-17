@@ -20,7 +20,7 @@ class App extends Component {
   state = {
     recipes: [],
     selected: {}
-    // recipeIngredients: []
+    //recipeIngredients: []
   };
 
   handleAddToSelected = recipeId => {
@@ -46,22 +46,23 @@ class App extends Component {
   };
 
   handleAddRecipe = recipe => {
+    console.log(recipe);
     this.setState({
       recipes: [...this.state.recipes, recipe]
     });
   };
 
-  handleAddIngredients = ingredients => {
-    console.log(ingredients);
-    const recipeIngredients = [...this.state.recipeIngredients];
-    console.log(recipeIngredients);
-    for (const ingredient of ingredients) {
-      recipeIngredients.push(ingredient);
-    }
-    this.setState({
-      recipeIngredients
-    });
-  };
+  // handleAddIngredients = ingredients => {
+  //   console.log(ingredients);
+  //   const recipeIngredients = [...this.state.recipeIngredients];
+  //   console.log(recipeIngredients);
+  //   for (const ingredient of ingredients) {
+  //     recipeIngredients.push(ingredient);
+  //   }
+  //   this.setState({
+  //     recipeIngredients
+  //   });
+  // };
 
   componentDidMount() {
     RecipesApiService.getRecipes().then(recipes =>

@@ -24,7 +24,9 @@ export default class RecipePage extends Component {
         <ul>
           {ingredients.map(ingredient => (
             <li key={ingredient.id}>
-              {ingredient.quantity} {ingredient.unit} {ingredient.name}{" "}
+              {ingredient.quantity} {ingredient.unit} {ingredient.name}
+              {ingredient.special_instructions ? ", " : ""}
+              {ingredient.special_instructions}
             </li>
           ))}
         </ul>

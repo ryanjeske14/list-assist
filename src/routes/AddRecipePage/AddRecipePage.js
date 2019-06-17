@@ -11,7 +11,9 @@ export default class AddRecipePage extends Component {
       name: "",
       description: "",
       instructions: "",
-      ingredients: [{ name: "", quantity: null, unit: "" }]
+      ingredients: [
+        { name: "", quantity: null, unit: "", special_instructions: "" }
+      ]
       // nameValid: false,
       // descriptionValid: false,
       // instructionsValid: false,
@@ -64,6 +66,12 @@ export default class AddRecipePage extends Component {
           onChange={this.handleChange.bind(this, i)}
         />
         <input
+          placeholder="Special Instructions (e.g., minced)"
+          name="special_instructions"
+          value={el.special_instructions || ""}
+          onChange={this.handleChange.bind(this, i)}
+        />
+        <input
           type="button"
           value="remove"
           onClick={this.removeClick.bind(this, i)}
@@ -113,6 +121,7 @@ export default class AddRecipePage extends Component {
       ingredient.name = ingredient.name.trim();
       ingredient.unit = ingredient.unit.trim();
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
+      ingredient.specialInstructions = ingredient.special_instructions.trim();
       ingredient.recipeId = recipeId;
     });
 
