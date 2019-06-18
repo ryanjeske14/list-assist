@@ -121,7 +121,8 @@ export default class AddRecipePage extends Component {
       ingredient.name = ingredient.name.trim();
       ingredient.unit = ingredient.unit.trim();
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
-      ingredient.specialInstructions = ingredient.special_instructions.trim();
+      if (ingredient.special_instructions)
+        ingredient.special_instructions = ingredient.special_instructions.trim();
       ingredient.recipeId = recipeId;
     });
 
