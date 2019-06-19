@@ -12,7 +12,7 @@ export default class AddRecipePage extends Component {
       description: "",
       instructions: "",
       ingredients: [
-        { name: "", quantity: null, unit: "", special_instructions: "" }
+        { name: "", quantity: null, unit_id: "", special_instructions: "" }
       ]
       // nameValid: false,
       // descriptionValid: false,
@@ -31,7 +31,7 @@ export default class AddRecipePage extends Component {
     this.setState(prevState => ({
       ingredients: [
         ...prevState.ingredients,
-        { name: "", quantity: null, unit: "" }
+        { name: "", quantity: null, unit_id: "" }
       ]
     }));
   }
@@ -43,6 +43,7 @@ export default class AddRecipePage extends Component {
   }
 
   createUI() {
+    const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
       <div key={i}>
         <input
@@ -59,12 +60,17 @@ export default class AddRecipePage extends Component {
           onChange={this.handleChange.bind(this, i)}
           required
         />
-        <input
-          placeholder="Unit"
-          name="unit"
-          value={el.unit || ""}
+        <select
+          name="unit_id"
+          //value={el.unit || ""}
           onChange={this.handleChange.bind(this, i)}
-        />
+        >
+          {units.map(unit => (
+            <option key={unit.id} value={unit.id}>
+              {unit.name}
+            </option>
+          ))}
+        </select>
         <input
           placeholder="Special Instructions (e.g., minced)"
           name="special_instructions"
@@ -114,16 +120,13 @@ export default class AddRecipePage extends Component {
     event.preventDefault();
     const Fraction = require("fraction.js");
     const ingredients = this.state.ingredients;
-    const recipeId = Math.floor(Math.random() * 10000000);
 
     ingredients.forEach(ingredient => {
-      ingredient.id = Math.floor(Math.random() * 10000000);
       ingredient.name = ingredient.name.trim();
-      ingredient.unit = ingredient.unit.trim();
+      ingredient.unit_id = Number(ingredient.unit_id);
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
       if (ingredient.special_instructions)
         ingredient.special_instructions = ingredient.special_instructions.trim();
-      ingredient.recipeId = recipeId;
     });
 
     const recipe = (({ name, description, instructions }) => ({
@@ -131,7 +134,6 @@ export default class AddRecipePage extends Component {
       description,
       instructions
     }))(this.state);
-    recipe.id = recipeId;
     recipe.ingredients = ingredients;
 
     //console.log(recipe);

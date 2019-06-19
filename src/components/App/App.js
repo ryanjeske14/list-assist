@@ -19,7 +19,8 @@ import RecipesApiService from "../../services/recipes-api-service";
 class App extends Component {
   state = {
     recipes: [],
-    selected: {}
+    selected: {},
+    units: []
     //recipeIngredients: []
   };
 
@@ -47,9 +48,11 @@ class App extends Component {
 
   handleAddRecipe = recipe => {
     console.log(recipe);
-    this.setState({
-      recipes: [...this.state.recipes, recipe]
-    });
+    RecipesApiService.postRecipe(recipe).then(recipe =>
+      this.setState({
+        recipes: [...this.state.recipes, recipe]
+      })
+    );
   };
 
   // handleAddIngredients = ingredients => {
@@ -68,12 +71,14 @@ class App extends Component {
     RecipesApiService.getRecipes().then(recipes =>
       this.setState({ recipes: recipes })
     );
+    RecipesApiService.getUnits().then(units => this.setState({ units: units }));
   }
 
   render() {
     const contextValue = {
       recipes: this.state.recipes,
       selected: this.state.selected,
+      units: this.state.units,
       recipeIngredients: this.state.recipeIngredients,
       addToSelected: this.handleAddToSelected,
       removeFromSelected: this.handleRemoveFromSelected,

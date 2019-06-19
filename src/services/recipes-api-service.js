@@ -10,7 +10,15 @@ const RecipesApiService = {
     );
   },
 
-  postRecipe(recipeId, text) {
+  getUnits() {
+    return fetch(`${config.API_ENDPOINT}/units`, {
+      headers: {}
+    }).then(res =>
+      !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
+    );
+  },
+
+  postRecipe(recipe) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
       method: "POST",
       headers: {
@@ -18,7 +26,7 @@ const RecipesApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
-        //
+        recipe
       })
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
