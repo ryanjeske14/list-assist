@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { Section } from "../../components/Utils/Utils";
 import AppContext from "../../AppContext";
+import TokenService from "../../services/token-service";
 
 export default class LoginPage extends Component {
   static contextType = AppContext;
@@ -18,6 +19,12 @@ export default class LoginPage extends Component {
     const destination = (location.state || {}).from || "/";
     history.push(destination);
     this.context.setLoggedIn();
+    const jwtPayload = TokenService.parseAuthToken();
+    this.context.setUser({
+      id: jwtPayload.user_id,
+      name: jwtPayload.name,
+      username: jwtPayload.sub
+    });
   };
 
   render() {

@@ -24,7 +24,8 @@ class App extends Component {
     recipes: [],
     selected: {},
     units: [],
-    loggedIn: false
+    loggedIn: false,
+    user: {}
   };
 
   handleAddToSelected = recipeId => {
@@ -141,6 +142,12 @@ class App extends Component {
     });
   };
 
+  setUser = user => {
+    this.setState({
+      user
+    });
+  };
+
   render() {
     const contextValue = {
       recipes: this.state.recipes,
@@ -152,7 +159,9 @@ class App extends Component {
       addRecipe: this.handleAddRecipe,
       addIngredients: this.handleAddIngredients,
       loggedIn: this.state.loggedIn,
-      setLoggedIn: this.setLoggedIn
+      setLoggedIn: this.setLoggedIn,
+      user: this.state.user,
+      setUser: this.setUser
     };
 
     return (
