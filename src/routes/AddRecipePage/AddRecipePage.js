@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AppContext from "../../AppContext";
 import "./AddRecipePage.css";
+import ValidationError from "../../components/ValidationError/ValidationError";
 
 export default class AddRecipePage extends Component {
   static contextType = AppContext;
@@ -13,16 +14,18 @@ export default class AddRecipePage extends Component {
       instructions: "",
       ingredients: [
         { name: "", quantity: null, unit_id: "", special_instructions: "" }
-      ]
-      // nameValid: false,
-      // descriptionValid: false,
-      // instructionsValid: false,
-      // validationMessages: {
-
-      //   name: "",
-      //   description: "",
-      //   instructions: ""
-      // }
+      ],
+      nameValid: false,
+      descriptionValid: false,
+      instructionsValid: false,
+      quantityValid: false,
+      formValid: false,
+      validationMessages: {
+        name: "",
+        // description: "",
+        // instructions: "",
+        quantity: ""
+      }
     };
     this.handleSubmit = this.handleSubmit.bind(this);
   }
@@ -46,22 +49,28 @@ export default class AddRecipePage extends Component {
     const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
       <div key={i}>
+        {/* <label htmlFor="name">Ingredient</label> */}
         <input
           placeholder="Ingredient"
+          id="name"
           name="name"
           value={el.name || ""}
           onChange={this.handleChange.bind(this, i)}
           required
         />
+        {/* <label htmlFor="quantity">Quantity</label> */}
         <input
           placeholder="Quantity"
+          id="quantity"
           name="quantity"
           value={el.quantity || ""}
           onChange={this.handleChange.bind(this, i)}
           required
         />
+        {/* <label htmlFor="unit_id">Unit</label> */}
         <select
           name="unit_id"
+          id="unit_id"
           //value={el.unit || ""}
           onChange={this.handleChange.bind(this, i)}
         >
@@ -71,8 +80,10 @@ export default class AddRecipePage extends Component {
             </option>
           ))}
         </select>
+        {/* <label htmlFor="special_instructions">Special Instructions</label> */}
         <input
           placeholder="Special Instructions (e.g., minced)"
+          id="special_instructions"
           name="special_instructions"
           value={el.special_instructions || ""}
           onChange={this.handleChange.bind(this, i)}
@@ -90,11 +101,18 @@ export default class AddRecipePage extends Component {
     const { name, value } = e.target;
     let ingredients = [...this.state.ingredients];
     ingredients[i] = { ...ingredients[i], [name]: value };
-    this.setState({ ingredients });
+    this.setState({ ingredients }, () => this.validateIngredients(ingredients));
   }
 
+  // handleChangeQuantity(i, e) {
+  //   const { name, value } = e.target;
+  //   let ingredients = [...this.state.ingredients];
+  //   ingredients[i] = { ...ingredients[i], [name]: value };
+  //   this.setState({ ingredients });
+  // }
+
   updatename(name) {
-    this.setState({ name });
+    this.setState({ name }, () => this.validateName(name));
   }
 
   updateDescription(description) {
@@ -105,16 +123,52 @@ export default class AddRecipePage extends Component {
     this.setState({ instructions });
   }
 
-  // validateName(fieldValue) {
-  //   const fieldErrors = { ...this.state.validationMessages };
-  //   let hasError = false;
+  validateName(fieldValue) {
+    const fieldErrors = { ...this.state.validationMessages };
+    let hasError = false;
 
-  //   fieldValue = fieldValue.trim();
-  //   if (fieldValue.length === 0) {
-  //     fieldErrors.note = "Recipe name is required.";
-  //     hasError = true;
-  //   }
-  // }
+    fieldValue = fieldValue.trim();
+    if (fieldValue.length === 0) {
+      fieldErrors.name = "Recipe name is required.";
+      hasError = true;
+    }
+    this.setState(
+      {
+        validationMessages: fieldErrors,
+        nameValid: !hasError
+      },
+      this.formValid
+    );
+  }
+
+  validateIngredients(ingredients) {
+    const REGEX_INTEGER_DECIMAL_FRACTION = /^[1-9]+[.]?[0-9]*([\/][1-9]+[.]?[0-9]*)*$/;
+    const fieldErrors = { ...this.state.validationMessages };
+    let hasError = false;
+
+    for (let ingredient of ingredients) {
+      if (!REGEX_INTEGER_DECIMAL_FRACTION.test(ingredient.quantity)) {
+        fieldErrors.quantity =
+          "Quantity must be in the form of an integer, decimal, or fraction";
+        hasError = true;
+      }
+      this.setState(
+        {
+          validationMessages: fieldErrors,
+          quantityValid: !hasError
+        },
+        this.formValid
+      );
+    }
+  }
+
+  formValid() {
+    this.setState({
+      formValid: this.state.nameValid && this.state.quantityValid
+      // this.state.descriptionValid &&
+      // this.state.instructionsValid
+    });
+  }
 
   handleSubmit(event) {
     event.preventDefault();
@@ -161,6 +215,10 @@ export default class AddRecipePage extends Component {
             maxLength="60"
             required
           />
+          <ValidationError
+            hasError={!this.state.nameValid}
+            message={this.state.validationMessages.name}
+          />
           <label htmlFor="description">Description</label>
           <textarea
             id="description"
@@ -177,6 +235,10 @@ export default class AddRecipePage extends Component {
           />
           <label>Ingredients</label>
           {this.createUI()}
+          <ValidationError
+            hasError={!this.state.quantityValid}
+            message={this.state.validationMessages.quantity}
+          />
           <input
             type="button"
             value="Add Ingredient"
