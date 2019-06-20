@@ -27,23 +27,22 @@ export default class AddRecipePage extends Component {
         quantity: ""
       }
     };
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
-  addClick() {
+  addClick = () => {
     this.setState(prevState => ({
       ingredients: [
         ...prevState.ingredients,
         { name: "", quantity: null, unit_id: "" }
       ]
     }));
-  }
+  };
 
-  removeClick(i) {
+  removeClick = i => {
     let ingredients = [...this.state.ingredients];
     ingredients.splice(i, 1);
     this.setState({ ingredients });
-  }
+  };
 
   createUI() {
     const { units = [] } = this.context;
@@ -55,7 +54,7 @@ export default class AddRecipePage extends Component {
           id="name"
           name="name"
           value={el.name || ""}
-          onChange={this.handleChange.bind(this, i)}
+          onChange={e => this.handleChange(e, i)}
           required
         />
         {/* <label htmlFor="quantity">Quantity</label> */}
@@ -64,7 +63,7 @@ export default class AddRecipePage extends Component {
           id="quantity"
           name="quantity"
           value={el.quantity || ""}
-          onChange={this.handleChange.bind(this, i)}
+          onChange={e => this.handleChange(e, i)}
           required
         />
         {/* <label htmlFor="unit_id">Unit</label> */}
@@ -72,7 +71,7 @@ export default class AddRecipePage extends Component {
           name="unit_id"
           id="unit_id"
           //value={el.unit || ""}
-          onChange={this.handleChange.bind(this, i)}
+          onChange={e => this.handleChange(e, i)}
         >
           {units.map(unit => (
             <option key={unit.id} value={unit.id}>
@@ -86,23 +85,19 @@ export default class AddRecipePage extends Component {
           id="special_instructions"
           name="special_instructions"
           value={el.special_instructions || ""}
-          onChange={this.handleChange.bind(this, i)}
+          onChange={e => this.handleChange(e, i)}
         />
-        <input
-          type="button"
-          value="remove"
-          onClick={this.removeClick.bind(this, i)}
-        />
+        <input type="button" value="remove" onClick={this.removeClick} />
       </div>
     ));
   }
 
-  handleChange(i, e) {
+  handleChange = (e, i) => {
     const { name, value } = e.target;
     let ingredients = [...this.state.ingredients];
     ingredients[i] = { ...ingredients[i], [name]: value };
     this.setState({ ingredients }, () => this.validateIngredients(ingredients));
-  }
+  };
 
   // handleChangeQuantity(i, e) {
   //   const { name, value } = e.target;
@@ -147,7 +142,10 @@ export default class AddRecipePage extends Component {
     let hasError = false;
 
     for (let ingredient of ingredients) {
-      if (!REGEX_INTEGER_DECIMAL_FRACTION.test(ingredient.quantity)) {
+      if (
+        !!ingredient.quantity &&
+        !REGEX_INTEGER_DECIMAL_FRACTION.test(ingredient.quantity)
+      ) {
         fieldErrors.quantity =
           "Quantity must be in the form of an integer, decimal, or fraction";
         hasError = true;
@@ -170,7 +168,7 @@ export default class AddRecipePage extends Component {
     });
   }
 
-  handleSubmit(event) {
+  handleSubmit = event => {
     event.preventDefault();
     const Fraction = require("fraction.js");
     const ingredients = this.state.ingredients;
@@ -199,7 +197,7 @@ export default class AddRecipePage extends Component {
     //this.context.addIngredients(ingredients);
 
     this.props.history.push("/recipes");
-  }
+  };
 
   render() {
     return (
@@ -239,11 +237,7 @@ export default class AddRecipePage extends Component {
             hasError={!this.state.quantityValid}
             message={this.state.validationMessages.quantity}
           />
-          <input
-            type="button"
-            value="Add Ingredient"
-            onClick={this.addClick.bind(this)}
-          />
+          <input type="button" value="Add Ingredient" onClick={this.addClick} />
           <input type="submit" value="Submit" />
         </form>
       </section>
