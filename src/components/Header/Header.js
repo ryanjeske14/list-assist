@@ -15,6 +15,7 @@ export default class Header extends Component {
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
     this.context.setLoggedIn();
+    this.context.setUser({});
   };
 
   renderLogoutLink() {

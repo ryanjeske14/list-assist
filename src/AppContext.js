@@ -8,7 +8,9 @@ const AppContext = React.createContext({
   addRecipe: () => {},
   addIngredients: () => {},
   loggedIn: false,
-  setLoggedIn: () => {}
+  setLoggedIn: () => {},
+  user: {},
+  setUser: () => {}
 });
 
 export default AppContext;

@@ -24,6 +24,11 @@ const TokenService = {
   parseJwt(jwt) {
     return jwtDecode(jwt);
   },
+  parseAuthToken() {
+    const authToken = TokenService.getAuthToken();
+    if (authToken) return TokenService.parseJwt(authToken);
+    else return undefined;
+  },
   readJwtToken() {
     return TokenService.parseJwt(TokenService.getAuthToken());
   },
