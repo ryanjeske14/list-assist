@@ -8,7 +8,6 @@ import GroceryListPage from "../../routes/GroceryListPage/GroceryListPage";
 import AddRecipePage from "../../routes/AddRecipePage/AddRecipePage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import AppContext from "../../AppContext";
-import STORE from "../../STORE";
 import Header from "../Header/Header";
 import LoginPage from "../../routes/LoginPage/LoginPage";
 import RegistrationPage from "../../routes/RegistrationPage/RegistrationPage";
@@ -71,15 +70,27 @@ class App extends Component {
   //   });
   // };
 
-  componentDidMount() {
-    RecipesApiService.getRecipes().then(recipes =>
-      this.setState({ recipes: recipes })
-    );
-    RecipesApiService.getUnits().then(units => this.setState({ units: units }));
-
-    this.setState({
+  async componentDidMount() {
+    await this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
+
+    if (this.state.loggedIn) {
+      const jwtPayload = TokenService.parseAuthToken();
+      await this.setUser({
+        id: jwtPayload.user_id,
+        name: jwtPayload.name,
+        username: jwtPayload.sub
+      });
+    }
+
+    const userId = this.state.user.id || 0;
+
+    RecipesApiService.getRecipes(userId).then(recipes =>
+      this.setState({ recipes })
+    );
+
+    RecipesApiService.getUnits().then(units => this.setState({ units: units }));
 
     /*
       set the function (callback) to call when a user goes idle
@@ -148,6 +159,14 @@ class App extends Component {
     });
   };
 
+  loadUserRecipes = () => {
+    const userId = this.state.user.id || 0;
+
+    RecipesApiService.getRecipes(userId).then(recipes =>
+      this.setState({ recipes })
+    );
+  };
+
   render() {
     const contextValue = {
       recipes: this.state.recipes,
@@ -161,7 +180,8 @@ class App extends Component {
       loggedIn: this.state.loggedIn,
       setLoggedIn: this.setLoggedIn,
       user: this.state.user,
-      setUser: this.setUser
+      setUser: this.setUser,
+      loadUserRecipes: this.loadUserRecipes
     };
 
     return (

@@ -14,17 +14,18 @@ export default class LoginPage extends Component {
     }
   };
 
-  handleLoginSuccess = () => {
+  handleLoginSuccess = async () => {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || "/";
     history.push(destination);
-    this.context.setLoggedIn();
-    const jwtPayload = TokenService.parseAuthToken();
-    this.context.setUser({
+    await this.context.setLoggedIn();
+    const jwtPayload = await TokenService.parseAuthToken();
+    await this.context.setUser({
       id: jwtPayload.user_id,
       name: jwtPayload.name,
       username: jwtPayload.sub
     });
+    this.context.loadUserRecipes();
   };
 
   render() {

@@ -2,9 +2,9 @@ import TokenService from "./token-service";
 import config from "../config";
 
 const RecipesApiService = {
-  getRecipes() {
+  getRecipes(userId) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
-      headers: {}
+      headers: { userId: userId }
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );

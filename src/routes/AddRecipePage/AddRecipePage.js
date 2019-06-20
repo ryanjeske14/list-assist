@@ -142,7 +142,7 @@ export default class AddRecipePage extends Component {
   }
 
   validateIngredients(ingredients) {
-    const REGEX_INTEGER_DECIMAL_FRACTION = /^[1-9]+[.]?[0-9]*([\/][1-9]+[.]?[0-9]*)*$/;
+    const REGEX_INTEGER_DECIMAL_FRACTION = /^[1-9]+[.]?[0-9]*([/][1-9]+[.]?[0-9]*)*$/;
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
 

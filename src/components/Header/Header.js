@@ -9,13 +9,14 @@ import "./Header.css";
 export default class Header extends Component {
   static contextType = AppContext;
 
-  handleLogoutClick = () => {
+  handleLogoutClick = async () => {
     TokenService.clearAuthToken();
     /* when logging out, clear the callbacks to the refresh api and idle auto logout */
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
-    this.context.setLoggedIn();
-    this.context.setUser({});
+    await this.context.setLoggedIn();
+    await this.context.setUser({});
+    this.context.loadUserRecipes();
   };
 
   renderLogoutLink() {
