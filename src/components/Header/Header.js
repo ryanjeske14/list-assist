@@ -1,12 +1,20 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Hyph } from "../Utils/Utils";
+import AppContext from "../../AppContext";
 import TokenService from "../../services/token-service";
+import IdleService from "../../services/idle-service";
 import "./Header.css";
 
 export default class Header extends Component {
+  static contextType = AppContext;
+
   handleLogoutClick = () => {
     TokenService.clearAuthToken();
+    /* when logging out, clear the callbacks to the refresh api and idle auto logout */
+    TokenService.clearCallbackBeforeExpiry();
+    IdleService.unRegisterIdleResets();
+    this.context.setLoggedIn();
   };
 
   renderLogoutLink() {
@@ -35,7 +43,7 @@ export default class Header extends Component {
         <h1>
           <Link to="/">List Assist</Link>
         </h1>
-        {TokenService.hasAuthToken()
+        {this.context.loggedIn
           ? this.renderLogoutLink()
           : this.renderLoginLink()}
       </nav>

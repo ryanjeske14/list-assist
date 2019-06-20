@@ -1,8 +1,11 @@
 import React, { Component } from "react";
 import LoginForm from "../../components/LoginForm/LoginForm";
 import { Section } from "../../components/Utils/Utils";
+import AppContext from "../../AppContext";
 
 export default class LoginPage extends Component {
+  static contextType = AppContext;
+
   static defaultProps = {
     location: {},
     history: {
@@ -14,6 +17,7 @@ export default class LoginPage extends Component {
     const { location, history } = this.props;
     const destination = (location.state || {}).from || "/";
     history.push(destination);
+    this.context.setLoggedIn();
   };
 
   render() {
