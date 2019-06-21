@@ -22,8 +22,8 @@ export default class AddRecipePage extends Component {
       formValid: false,
       validationMessages: {
         name: "",
-        // description: "",
-        // instructions: "",
+        description: "",
+        instructions: "",
         quantity: ""
       }
     };
@@ -44,7 +44,20 @@ export default class AddRecipePage extends Component {
     this.setState({ ingredients });
   };
 
-  createUI() {
+  sortUnits = (a, b) => {
+    const unitA = a.name.toUpperCase();
+    const unitB = b.name.toUpperCase();
+
+    let comparison = 0;
+    if (unitA > unitB) {
+      comparison = 1;
+    } else if (unitA < unitB) {
+      comparison = -1;
+    }
+    return comparison;
+  };
+
+  ingredientsInputs() {
     const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
       <div key={i}>
@@ -73,7 +86,7 @@ export default class AddRecipePage extends Component {
           //value={el.unit || ""}
           onChange={e => this.handleChange(e, i)}
         >
-          {units.map(unit => (
+          {units.sort(this.sortUnits).map(unit => (
             <option key={unit.id} value={unit.id}>
               {unit.name}
             </option>
@@ -99,23 +112,18 @@ export default class AddRecipePage extends Component {
     this.setState({ ingredients }, () => this.validateIngredients(ingredients));
   };
 
-  // handleChangeQuantity(i, e) {
-  //   const { name, value } = e.target;
-  //   let ingredients = [...this.state.ingredients];
-  //   ingredients[i] = { ...ingredients[i], [name]: value };
-  //   this.setState({ ingredients });
-  // }
-
   updatename(name) {
     this.setState({ name }, () => this.validateName(name));
   }
 
   updateDescription(description) {
-    this.setState({ description });
+    this.setState({ description }, () => this.validateDescription(description));
   }
 
   updateInstructions(instructions) {
-    this.setState({ instructions });
+    this.setState({ instructions }, () =>
+      this.validateInstructions(instructions)
+    );
   }
 
   validateName(fieldValue) {
@@ -123,14 +131,52 @@ export default class AddRecipePage extends Component {
     let hasError = false;
 
     fieldValue = fieldValue.trim();
-    if (fieldValue.length === 0) {
-      fieldErrors.name = "Recipe name is required.";
+    if (fieldValue.length <= 3) {
+      fieldErrors.name = "Recipe name must be at least 3 characters long.";
       hasError = true;
     }
     this.setState(
       {
         validationMessages: fieldErrors,
         nameValid: !hasError
+      },
+      this.formValid
+    );
+  }
+
+  validateDescription(fieldValue) {
+    const fieldErrors = { ...this.state.validationMessages };
+    let hasError = false;
+
+    fieldValue = fieldValue.trim();
+    if (fieldValue.length <= 3) {
+      fieldErrors.description =
+        "Description must be at least 3 characters long.";
+      hasError = true;
+    }
+    this.setState(
+      {
+        validationMessages: fieldErrors,
+        descriptionValid: !hasError
+      },
+      this.formValid
+    );
+  }
+
+  validateInstructions(fieldValue) {
+    const fieldErrors = { ...this.state.validationMessages };
+    let hasError = false;
+
+    fieldValue = fieldValue.trim();
+    if (fieldValue.length <= 3) {
+      fieldErrors.instructions =
+        "Instructions must be at least 3 characters long.";
+      hasError = true;
+    }
+    this.setState(
+      {
+        validationMessages: fieldErrors,
+        instructionsValid: !hasError
       },
       this.formValid
     );
@@ -162,9 +208,11 @@ export default class AddRecipePage extends Component {
 
   formValid() {
     this.setState({
-      formValid: this.state.nameValid && this.state.quantityValid
-      // this.state.descriptionValid &&
-      // this.state.instructionsValid
+      formValid:
+        this.state.nameValid &&
+        this.state.quantityValid &&
+        this.state.descriptionValid &&
+        this.state.instructionsValid
     });
   }
 
@@ -188,13 +236,7 @@ export default class AddRecipePage extends Component {
     }))(this.state);
     recipe.ingredients = ingredients;
 
-    //console.log(recipe);
-
     this.context.addRecipe(recipe);
-
-    //console.log(ingredients);
-
-    //this.context.addIngredients(ingredients);
 
     this.props.history.push("/recipes");
   };
@@ -224,6 +266,10 @@ export default class AddRecipePage extends Component {
             minLength="3"
             maxLength="400"
           />
+          <ValidationError
+            hasError={!this.state.descriptionValid}
+            message={this.state.validationMessages.description}
+          />
           <label htmlFor="instructions">Instructions</label>
           <textarea
             id="instructions"
@@ -231,8 +277,12 @@ export default class AddRecipePage extends Component {
             minLength="3"
             maxLength="4000"
           />
+          <ValidationError
+            hasError={!this.state.instructionsValid}
+            message={this.state.validationMessages.instructions}
+          />
           <label>Ingredients</label>
-          {this.createUI()}
+          {this.ingredientsInputs()}
           <ValidationError
             hasError={!this.state.quantityValid}
             message={this.state.validationMessages.quantity}
