@@ -69,6 +69,7 @@ export default class AddRecipePage extends Component {
           value={el.name || ""}
           onChange={e => this.handleChange(e, i)}
           required
+          maxLength="60"
         />
         {/* <label htmlFor="quantity">Quantity</label> */}
         <input
@@ -78,6 +79,7 @@ export default class AddRecipePage extends Component {
           value={el.quantity || ""}
           onChange={e => this.handleChange(e, i)}
           required
+          maxLength="10"
         />
         {/* <label htmlFor="unit_id">Unit</label> */}
         <select
@@ -97,6 +99,7 @@ export default class AddRecipePage extends Component {
           placeholder="Special Instructions (e.g., minced)"
           id="special_instructions"
           name="special_instructions"
+          maxLength="30"
           value={el.special_instructions || ""}
           onChange={e => this.handleChange(e, i)}
         />
