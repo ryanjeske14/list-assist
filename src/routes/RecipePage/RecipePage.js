@@ -19,6 +19,7 @@ export default class RecipePage extends Component {
   };
 
   render() {
+    const Fraction = require("fraction.js");
     const { recipes } = this.context;
     const { recipeId } = this.props.match.params;
     const recipe = findRecipe(recipes, recipeId) || {};
@@ -33,7 +34,8 @@ export default class RecipePage extends Component {
         <ul>
           {ingredients.map(ingredient => (
             <li key={ingredient.id}>
-              {ingredient.quantity} {ingredient.unit} {ingredient.name}
+              {new Fraction(ingredient.quantity).toFraction(true)}{" "}
+              {ingredient.unit} {ingredient.name}
               {ingredient.special_instructions ? ", " : ""}
               {ingredient.special_instructions}
             </li>

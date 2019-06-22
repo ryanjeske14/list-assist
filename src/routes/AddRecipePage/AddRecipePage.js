@@ -38,7 +38,7 @@ export default class AddRecipePage extends Component {
     }));
   };
 
-  removeClick = i => {
+  removeClick = (e, i) => {
     let ingredients = [...this.state.ingredients];
     ingredients.splice(i, 1);
     this.setState({ ingredients });
@@ -103,7 +103,11 @@ export default class AddRecipePage extends Component {
           value={el.special_instructions || ""}
           onChange={e => this.handleChange(e, i)}
         />
-        <input type="button" value="remove" onClick={this.removeClick} />
+        <input
+          type="button"
+          value="remove"
+          onClick={e => this.removeClick(e, i)}
+        />
       </div>
     ));
   }
@@ -186,7 +190,7 @@ export default class AddRecipePage extends Component {
   }
 
   validateIngredients(ingredients) {
-    const REGEX_INTEGER_DECIMAL_FRACTION = /^[1-9]+[.]?[0-9]*([/][1-9]+[.]?[0-9]*)*$/;
+    const REGEX_INTEGER_DECIMAL_FRACTION = /^[0-9]+[.]?[0-9]*([/][1-9]+[.]?[0-9]*)*$/;
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
 
@@ -196,7 +200,7 @@ export default class AddRecipePage extends Component {
         !REGEX_INTEGER_DECIMAL_FRACTION.test(ingredient.quantity)
       ) {
         fieldErrors.quantity =
-          "Quantity must be in the form of an integer, decimal, or fraction";
+          "Quantity must be in the form of a postive integer, decimal, or fraction.";
         hasError = true;
       }
       this.setState(
@@ -291,7 +295,11 @@ export default class AddRecipePage extends Component {
             message={this.state.validationMessages.quantity}
           />
           <input type="button" value="Add Ingredient" onClick={this.addClick} />
-          <input type="submit" value="Submit" />
+          <input
+            type="submit"
+            value="Submit"
+            disabled={!this.state.formValid}
+          />
         </form>
       </section>
     );
