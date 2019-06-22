@@ -7,12 +7,12 @@ const AppContext = React.createContext({
   addToSelected: () => {},
   removeFromSelected: () => {},
   addRecipe: () => {},
-  addIngredients: () => {},
   loggedIn: false,
   setLoggedIn: () => {},
   user: {},
   setUser: () => {},
-  loadUserRecipes: () => {}
+  loadUserRecipes: () => {},
+  deleteRecipe: () => {}
 });
 
 export default AppContext;

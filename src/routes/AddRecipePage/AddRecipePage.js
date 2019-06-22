@@ -13,7 +13,7 @@ export default class AddRecipePage extends Component {
       description: "",
       instructions: "",
       ingredients: [
-        { name: "", quantity: null, unit_id: "", special_instructions: "" }
+        { name: "", quantity: null, unit_id: 1, special_instructions: "" }
       ],
       nameValid: false,
       descriptionValid: false,
@@ -134,7 +134,7 @@ export default class AddRecipePage extends Component {
     let hasError = false;
 
     fieldValue = fieldValue.trim();
-    if (fieldValue.length <= 3) {
+    if (fieldValue.length < 3) {
       fieldErrors.name = "Recipe name must be at least 3 characters long.";
       hasError = true;
     }
@@ -152,7 +152,7 @@ export default class AddRecipePage extends Component {
     let hasError = false;
 
     fieldValue = fieldValue.trim();
-    if (fieldValue.length <= 3) {
+    if (fieldValue.length < 3) {
       fieldErrors.description =
         "Description must be at least 3 characters long.";
       hasError = true;
@@ -171,7 +171,7 @@ export default class AddRecipePage extends Component {
     let hasError = false;
 
     fieldValue = fieldValue.trim();
-    if (fieldValue.length <= 3) {
+    if (fieldValue.length < 3) {
       fieldErrors.instructions =
         "Instructions must be at least 3 characters long.";
       hasError = true;

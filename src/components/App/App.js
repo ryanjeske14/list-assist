@@ -50,7 +50,6 @@ class App extends Component {
   };
 
   handleAddRecipe = recipe => {
-    console.log(recipe);
     RecipesApiService.postRecipe(recipe).then(recipe =>
       this.setState({
         recipes: [...this.state.recipes, recipe]
@@ -58,17 +57,13 @@ class App extends Component {
     );
   };
 
-  // handleAddIngredients = ingredients => {
-  //   console.log(ingredients);
-  //   const recipeIngredients = [...this.state.recipeIngredients];
-  //   console.log(recipeIngredients);
-  //   for (const ingredient of ingredients) {
-  //     recipeIngredients.push(ingredient);
-  //   }
-  //   this.setState({
-  //     recipeIngredients
-  //   });
-  // };
+  handleDeleteRecipe = recipeId => {
+    RecipesApiService.deleteRecipe(recipeId).then(
+      this.setState({
+        recipes: this.state.recipes.filter(recipe => recipe.id != recipeId)
+      })
+    );
+  };
 
   async componentDidMount() {
     await this.setState({
@@ -176,12 +171,12 @@ class App extends Component {
       addToSelected: this.handleAddToSelected,
       removeFromSelected: this.handleRemoveFromSelected,
       addRecipe: this.handleAddRecipe,
-      addIngredients: this.handleAddIngredients,
       loggedIn: this.state.loggedIn,
       setLoggedIn: this.setLoggedIn,
       user: this.state.user,
       setUser: this.setUser,
-      loadUserRecipes: this.loadUserRecipes
+      loadUserRecipes: this.loadUserRecipes,
+      deleteRecipe: this.handleDeleteRecipe
     };
 
     return (

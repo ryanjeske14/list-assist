@@ -31,6 +31,16 @@ const RecipesApiService = {
     }).then(res =>
       !res.ok ? res.json().then(e => Promise.reject(e)) : res.json()
     );
+  },
+
+  deleteRecipe(id) {
+    return fetch(`${config.API_ENDPOINT}/recipes/${id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      }
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
   }
 };
 
