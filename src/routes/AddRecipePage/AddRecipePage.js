@@ -33,7 +33,7 @@ export default class AddRecipePage extends Component {
     this.setState(prevState => ({
       ingredients: [
         ...prevState.ingredients,
-        { name: "", quantity: null, unit_id: "" }
+        { name: "", quantity: null, unit_id: 1, special_instructions: "" }
       ]
     }));
   };
