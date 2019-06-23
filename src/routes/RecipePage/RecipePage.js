@@ -14,7 +14,7 @@ export default class RecipePage extends Component {
 
     const { recipeId } = this.props.match.params;
 
-    this.context.deleteRecipe(recipeId);
+    this.context.deleteRecipe(parseInt(recipeId));
     this.props.history.push("/recipes");
   };
 

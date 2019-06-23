@@ -60,7 +60,7 @@ class App extends Component {
   handleDeleteRecipe = recipeId => {
     RecipesApiService.deleteRecipe(recipeId).then(
       this.setState({
-        recipes: this.state.recipes.filter(recipe => recipe.id != recipeId)
+        recipes: this.state.recipes.filter(recipe => recipe.id !== recipeId)
       })
     );
   };
