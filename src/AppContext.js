@@ -12,7 +12,8 @@ const AppContext = React.createContext({
   user: {},
   setUser: () => {},
   loadUserRecipes: () => {},
-  deleteRecipe: () => {}
+  deleteRecipe: () => {},
+  editRecipe: () => {}
 });
 
 export default AppContext;

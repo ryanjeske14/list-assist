@@ -10,6 +10,16 @@ const RecipesApiService = {
     );
   },
 
+  getRecipe(recipeId) {
+    return fetch(`${config.API_ENDPOINT}/recipes/${recipeId}`, {
+      headers: {}
+    }).then(res => {
+      if (!res.ok) return res.json().then(error => Promise.reject(error));
+
+      return res.json();
+    });
+  },
+
   getUnits() {
     return fetch(`${config.API_ENDPOINT}/units`, {
       headers: {}
@@ -40,6 +50,19 @@ const RecipesApiService = {
         "content-type": "application/json",
         authorization: `bearer ${TokenService.getAuthToken()}`
       }
+    }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
+  },
+
+  editRecipe(recipe) {
+    return fetch(`${config.API_ENDPOINT}/recipes/${recipe.id}`, {
+      method: "PATCH",
+      headers: {
+        "content-type": "application/json",
+        authorization: `bearer ${TokenService.getAuthToken()}`
+      },
+      body: JSON.stringify({
+        recipe
+      })
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
   }
 };

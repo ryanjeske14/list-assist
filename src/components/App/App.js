@@ -6,6 +6,7 @@ import RecipesPage from "../../routes/RecipesPage/RecipesPage";
 import RecipePage from "../../routes/RecipePage/RecipePage";
 import GroceryListPage from "../../routes/GroceryListPage/GroceryListPage";
 import AddRecipePage from "../../routes/AddRecipePage/AddRecipePage";
+import EditRecipePage from "../../routes/EditRecipePage/EditRecipePage";
 import NotFoundPage from "../../routes/NotFoundPage/NotFoundPage";
 import AppContext from "../../AppContext";
 import Header from "../Header/Header";
@@ -61,6 +62,17 @@ class App extends Component {
     RecipesApiService.deleteRecipe(recipeId).then(
       this.setState({
         recipes: this.state.recipes.filter(recipe => recipe.id !== recipeId)
+      })
+    );
+  };
+
+  handleEditRecipe = updatedRecipe => {
+    console.log(updatedRecipe);
+    RecipesApiService.editRecipe(updatedRecipe).then(
+      this.setState({
+        recipes: this.state.recipes.map(recipe =>
+          recipe.id !== updatedRecipe.id ? recipe : updatedRecipe
+        )
       })
     );
   };
@@ -176,7 +188,8 @@ class App extends Component {
       user: this.state.user,
       setUser: this.setUser,
       loadUserRecipes: this.loadUserRecipes,
-      deleteRecipe: this.handleDeleteRecipe
+      deleteRecipe: this.handleDeleteRecipe,
+      editRecipe: this.handleEditRecipe
     };
 
     return (
@@ -192,6 +205,10 @@ class App extends Component {
               <Route path={"/recipes"} component={RecipesPage} />
               <Route path={"/grocery-list"} component={GroceryListPage} />
               <PrivateRoute path={"/add-recipe"} component={AddRecipePage} />
+              <PrivateRoute
+                path={"/edit-recipe/:recipeId"}
+                component={EditRecipePage}
+              />
               <PublicOnlyRoute path={"/login"} component={LoginPage} />
               <PublicOnlyRoute
                 path={"/register"}
