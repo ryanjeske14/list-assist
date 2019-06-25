@@ -78,7 +78,6 @@ export default class EditRecipePage extends Component {
 
   ingredientsInputs() {
     const { units = [] } = this.context;
-    const { ingredients } = this.state;
     return this.state.ingredients.map((el, i) => (
       <div key={i}>
         {/* <label htmlFor="name">Ingredient</label> */}

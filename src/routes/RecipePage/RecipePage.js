@@ -33,11 +33,11 @@ export default class RecipePage extends Component {
       <section>
         <h2>{recipe.name}</h2>
         <h3>Description:</h3>
-        <p>
+        <div>
           {recipeDescription.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;
           })}
-        </p>
+        </div>
         <h3>Ingredients:</h3>
         <ul>
           {ingredients.map(ingredient => (
@@ -50,11 +50,11 @@ export default class RecipePage extends Component {
           ))}
         </ul>
         <h3>Instructions:</h3>
-        <p>
+        <div>
           {recipeInstructions.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;
           })}
-        </p>
+        </div>
         {this.context.user.id === recipe.owner_id ? (
           <button onClick={this.handleClickDelete}>Delete Recipe</button>
         ) : (

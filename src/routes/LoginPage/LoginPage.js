@@ -16,7 +16,7 @@ export default class LoginPage extends Component {
 
   handleLoginSuccess = async () => {
     const { location, history } = this.props;
-    const destination = (location.state || {}).from || "/";
+    const destination = (location.state || {}).from || "/recipes";
     history.push(destination);
     await this.context.setLoggedIn();
     const jwtPayload = await TokenService.parseAuthToken();
