@@ -53,7 +53,7 @@ const RecipesApiService = {
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
   },
 
-  editRecipe(recipe) {
+  editRecipe(recipe, ingredientsToDelete) {
     return fetch(`${config.API_ENDPOINT}/recipes/${recipe.id}`, {
       method: "PATCH",
       headers: {
@@ -61,7 +61,8 @@ const RecipesApiService = {
         authorization: `bearer ${TokenService.getAuthToken()}`
       },
       body: JSON.stringify({
-        recipe
+        recipe,
+        ingredientsToDelete
       })
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
   }

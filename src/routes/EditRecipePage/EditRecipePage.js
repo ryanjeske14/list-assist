@@ -16,6 +16,7 @@ export default class EditRecipePage extends Component {
       ingredients: [
         { name: "", quantity: null, unit_id: 1, special_instructions: "" }
       ],
+      ingredientsToDelete: [],
       nameValid: true,
       descriptionValid: true,
       instructionsValid: true,
@@ -38,7 +39,9 @@ export default class EditRecipePage extends Component {
         name: recipe.name,
         description: recipe.description,
         instructions: recipe.instructions,
-        ingredients: recipe.ingredients
+        ingredients: recipe.ingredients,
+        ingredientsToDelete: recipe.ingredients,
+        owner_id: recipe.owner_id
       });
     });
   }
@@ -54,8 +57,10 @@ export default class EditRecipePage extends Component {
 
   removeClick = (e, i) => {
     let ingredients = [...this.state.ingredients];
-    ingredients.splice(i, 1);
-    this.setState({ ingredients });
+    if (ingredients.length > 1) {
+      ingredients.splice(i, 1);
+      this.setState({ ingredients });
+    } else alert("Must have at least one ingredient.");
   };
 
   sortUnits = (a, b) => {
@@ -242,24 +247,28 @@ export default class EditRecipePage extends Component {
     event.preventDefault();
     const Fraction = require("fraction.js");
     const ingredients = this.state.ingredients;
+    const { ingredientsToDelete } = this.state;
+    const { units } = this.context;
 
     ingredients.forEach(ingredient => {
       ingredient.name = ingredient.name.trim();
       ingredient.unit_id = Number(ingredient.unit_id);
+      ingredient.unit = units.find(unit => unit.id === ingredient.unit_id).name;
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
       if (ingredient.special_instructions)
         ingredient.special_instructions = ingredient.special_instructions.trim();
     });
 
-    const recipe = (({ id, name, description, instructions }) => ({
+    const recipe = (({ id, name, description, instructions, owner_id }) => ({
       id,
       name,
       description,
-      instructions
+      instructions,
+      owner_id
     }))(this.state);
     recipe.ingredients = ingredients;
 
-    this.context.editRecipe(recipe);
+    this.context.editRecipe(recipe, ingredientsToDelete);
 
     this.props.history.push("/recipes");
   };

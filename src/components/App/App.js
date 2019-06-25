@@ -66,9 +66,9 @@ class App extends Component {
     );
   };
 
-  handleEditRecipe = updatedRecipe => {
+  handleEditRecipe = (updatedRecipe, ingredientsToDelete) => {
     console.log(updatedRecipe);
-    RecipesApiService.editRecipe(updatedRecipe).then(
+    RecipesApiService.editRecipe(updatedRecipe, ingredientsToDelete).then(
       this.setState({
         recipes: this.state.recipes.map(recipe =>
           recipe.id !== updatedRecipe.id ? recipe : updatedRecipe

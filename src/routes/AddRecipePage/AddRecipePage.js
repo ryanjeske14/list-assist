@@ -40,8 +40,10 @@ export default class AddRecipePage extends Component {
 
   removeClick = (e, i) => {
     let ingredients = [...this.state.ingredients];
-    ingredients.splice(i, 1);
-    this.setState({ ingredients });
+    if (ingredients.length > 1) {
+      ingredients.splice(i, 1);
+      this.setState({ ingredients });
+    } else alert("Must have at least one ingredient.");
   };
 
   sortUnits = (a, b) => {

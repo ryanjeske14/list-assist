@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import AppContext from "../../AppContext";
 import { findRecipe } from "../../function-helpers";
 
@@ -15,6 +16,7 @@ export default class RecipePage extends Component {
     const { recipeId } = this.props.match.params;
 
     this.context.deleteRecipe(parseInt(recipeId));
+
     this.props.history.push("/recipes");
   };
 
@@ -45,6 +47,13 @@ export default class RecipePage extends Component {
         <p>{recipe.instructions}</p>
         {this.context.user.id === recipe.owner_id ? (
           <button onClick={this.handleClickDelete}>Delete Recipe</button>
+        ) : (
+          <></>
+        )}
+        {this.context.user.id === recipe.owner_id ? (
+          <button>
+            <Link to={`/edit-recipe/${recipe.id}`}>Edit Recipe</Link>
+          </button>
         ) : (
           <></>
         )}
