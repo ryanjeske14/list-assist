@@ -25,13 +25,19 @@ export default class RecipePage extends Component {
     const { recipes } = this.context;
     const { recipeId } = this.props.match.params;
     const recipe = findRecipe(recipes, recipeId) || {};
+    const recipeDescription = recipe.description || "";
+    const recipeInstructions = recipe.instructions || "";
     const ingredients = recipe.ingredients || [];
 
     return (
       <section>
         <h2>{recipe.name}</h2>
         <h3>Description:</h3>
-        <p>{recipe.description}</p>
+        <p>
+          {recipeDescription.split("\n").map((item, i) => {
+            return <p key={i}>{item}</p>;
+          })}
+        </p>
         <h3>Ingredients:</h3>
         <ul>
           {ingredients.map(ingredient => (
@@ -44,7 +50,11 @@ export default class RecipePage extends Component {
           ))}
         </ul>
         <h3>Instructions:</h3>
-        <p>{recipe.instructions}</p>
+        <p>
+          {recipeInstructions.split("\n").map((item, i) => {
+            return <p key={i}>{item}</p>;
+          })}
+        </p>
         {this.context.user.id === recipe.owner_id ? (
           <button onClick={this.handleClickDelete}>Delete Recipe</button>
         ) : (
