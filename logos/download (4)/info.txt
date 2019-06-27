@@ -1,0 +1,14 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+
+font name: Decalotype-Medium
+font link: https://hanken.co/product/decalotype/
+font author: Hanken Design Co.
+font author site: https://hanken.co/
+
+icon designer: Smalllike
+icon designer link: /smalllike
+        
+{"bg":"#FCF4ED","icon-gradient-0":"#DA6E2A","icon-gradient-1":"#E39E5A","font":"#321E0F"}
+      
