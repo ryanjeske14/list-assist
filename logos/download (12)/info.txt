@@ -1,0 +1,17 @@
+
+Hope you enjoy your new logo, here are the people that
+made your beautiful logo happen :)
+
+font name: manuale-bold
+font link: https://fonts.google.com/specimen/Manuale
+font author: Omnibus Type
+font author site: http://www.omnibus-type.com/
+
+icon designer: Smalllike
+icon designer link: /smalllike
+        
+
+fontColor: {"gradient-0":"#FCB735","gradient-1":"#F17332"}
+bgColor: {"hex":"#FFFFFF"}
+iconColor: {"gradient-0":"#FCB735","gradient-1":"#F17332"}
+      

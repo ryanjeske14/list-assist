@@ -6,11 +6,10 @@ import "./LandingPage.css";
 export default class LandingPage extends Component {
   render() {
     return (
-      <main role="main">
-        <header role="banner">
-          <h1>List Assist</h1>
-          <h2>grocery lists made easy</h2>
-        </header>
+      <section className="landing">
+        <section role="banner" className="banner">
+          <h2>GROCERY LISTS MADE EASY</h2>
+        </section>
 
         <section>
           <header>
@@ -22,6 +21,7 @@ export default class LandingPage extends Component {
             is made for you, giving you back time for the things that matter
             most.
           </p>
+          <img src="/img/icon-2.png" alt="icon" />
         </section>
 
         <section>
@@ -52,20 +52,19 @@ export default class LandingPage extends Component {
           </p>
         </section>
 
-        <section>
-          <header>
-            <h2>
-              <Link to="/recipes">Get Started</Link>
-            </h2>
-            {/* <p>
+        <section className="get_started_section">
+          <h2 className="get_started">
+            <Link to="/recipes">GET STARTED</Link>
+          </h2>
+          {/* <p>
               Register below to add and manage your own favorite recipes.
               There's no need to register if you'd just like to use the
               pre-existing recipes on our site. Happy shopping!
             </p> */}
-          </header>
+
           {/* <RegistrationForm /> */}
         </section>
-      </main>
+      </section>
     );
   }
 }
