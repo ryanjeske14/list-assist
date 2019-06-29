@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import AppContext from "../../AppContext";
+import "./GroceryListPage.css";
 
 export default class GroceryListPage extends Component {
   static contextType = AppContext;
@@ -38,14 +39,23 @@ export default class GroceryListPage extends Component {
     console.log(map);
 
     return (
-      <section>
+      <section className="grocery_list_section">
         <h1>Grocery List</h1>
-        <ul>
+        <ul className="grocery_list">
           {groceryList.map((grocery, i) => (
-            <li key={i}>{grocery}</li>
+            <li className="grocery_li" key={i}>
+              {grocery}
+            </li>
           ))}
         </ul>
-        <button onClick={() => this.handleClickBack()}>Back to Recipes</button>
+        <div>
+          <button
+            className="back_to_recipes_button"
+            onClick={() => this.handleClickBack()}
+          >
+            Back to Recipes
+          </button>
+        </div>
       </section>
     );
   }

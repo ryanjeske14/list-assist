@@ -10,20 +10,21 @@ export default class RecipesList extends Component {
     this.context.addToSelected(recipeId);
   };
 
-  handleRemoveFromList = recipeId => {
-    this.context.removeFromSelected(recipeId);
-  };
-
   render() {
     const { recipes } = this.context;
     return (
-      <ul>
+      <ul className="recipes_list">
         {recipes.map(recipe => (
-          <li key={recipe.id}>
-            <Link to={`/recipes/${recipe.id}`}>{recipe.name}</Link>
-            <button onClick={() => this.handleAddToList(recipe.id)}>+</button>
-            <button onClick={() => this.handleRemoveFromList(recipe.id)}>
-              -
+          <li className="recipe_li" key={recipe.id}>
+            <Link className="recipe_link" to={`/recipes/${recipe.id}`}>
+              {recipe.name}
+            </Link>
+
+            <button
+              className="add_recipe_button"
+              onClick={() => this.handleAddToList(recipe.id)}
+            >
+              Add
             </button>
           </li>
         ))}
