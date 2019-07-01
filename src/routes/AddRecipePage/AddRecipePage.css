@@ -1,11 +1,139 @@
   form {
-    display: flex;
-    flex-direction: column;
-    width: 80%;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 15px;
   }
   
-  button {
-    margin-top: 10px;
+  .recipe_inputs {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(238, 147, 0, 0.125);
+    padding: 15px 30px;
+    border-radius: 4px;
+    justify-content: center;
   }
+
+  .ingredient_inputs {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #444;
+    padding: 8px 10px 16px 10px;
+    margin: 10px 0;
+    align-items: center;
+    background-color: white;
+    border: 1px solid rgba(128, 128, 128, 0.822);
+    border-radius: 4px;
+  }
+
+  .ingredient_number {
+    margin: 0 0 4px 0;
+  }
+
+  .ingredient_input {
+    margin: 5px 10px;
+    width: 90%;
+    padding: 3px;
+    border-radius: 2px;
+    border: 1px solid rgb(151, 151, 151);
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  select.ingredient_input:invalid {
+      color: gray;
+  }
+
+  .unit_option {
+    color: black;
+  }
+
+  .add_ingredient_button, .remove_ingredient_button {
+    background-color: #F39305;
+    border-radius: 2px;
+    border: none;
+    font-size: 20px;
+    padding: 3px 15px;
+    margin: 20px auto;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 0 20px;
+    text-decoration: none;
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .remove_ingredient_button {
+    margin-top: 10px;
+    width: 150px;
+  }
+
+  .add_ingredient_button {
+    margin: 10px auto;
+    width: 220px;
+  }
+
+  .recipe_name {
+    height: 26px;
+  }
+
+  .description {
+    height: 75px;
+    resize: none;
+  }
+
+  .instructions {
+    height: 100px;
+    resize: none;
+  }
+
+  .recipe_input {
+    border-radius: 2px;
+    border: 1px solid rgba(128, 128, 128, 0.822);
+    margin: 5px 0 12px 0;
+    padding: 4px 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 14px;
+  }
+
+  .submit_button {
+    background-color: #444;
+    border-radius: 2px;
+    border: none;
+    font-size: 20px;
+    padding: 8px 20px;
+    margin: 30px 0;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+  }
+
+  .submit_button:disabled {
+    background-color: rgba(233, 233, 233, 0.705);
+    border-radius: 2px;
+    border: none;
+    font-size: 20px;
+    padding: 8px 20px;
+    margin: 30px 0;
+    color: rgba(163, 163, 163, 0.76);
+    transition: all 0.3s ease-in-out;
+    width: 250px;
+    cursor: not-allowed;
+  }
+
+  @media screen and (min-width: 800px) {
+    .recipe_input {
+      max-width: 750px;
+      width: 95%;
+      margin: 0 auto;
+    }
+    .ingredients_section {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-top: 2px;
+    }
+    .ingredient_inputs {
+      width: 45%;
+      margin: 15px 15px;
+    }
+}

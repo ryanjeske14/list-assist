@@ -79,7 +79,8 @@ export default class EditRecipePage extends Component {
   ingredientsInputs() {
     const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
-      <div key={i}>
+      <div className="ingredient_inputs" key={i}>
+        <p className="ingredient_number">Ingredient {i + 1}</p>
         {/* <label htmlFor="name">Ingredient</label> */}
         <input
           placeholder="Ingredient"
@@ -89,6 +90,7 @@ export default class EditRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           required
           maxLength="60"
+          className="ingredient_input"
         />
         {/* <label htmlFor="quantity">Quantity</label> */}
         <input
@@ -99,6 +101,7 @@ export default class EditRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           required
           maxLength="10"
+          className="ingredient_input"
         />
         {/* <label htmlFor="unit_id">Unit</label> */}
         <select
@@ -106,9 +109,10 @@ export default class EditRecipePage extends Component {
           id="unit_id"
           value={el.unit_id || ""}
           onChange={e => this.handleChange(e, i)}
+          className="ingredient_input"
         >
           {units.sort(this.sortUnits).map(unit => (
-            <option key={unit.id} value={unit.id}>
+            <option className="unit_placeholder" key={unit.id} value={unit.id}>
               {unit.name}
             </option>
           ))}
@@ -121,11 +125,13 @@ export default class EditRecipePage extends Component {
           maxLength="30"
           value={el.special_instructions || ""}
           onChange={e => this.handleChange(e, i)}
+          className="ingredient_input"
         />
         <input
           type="button"
-          value="remove"
+          value="Delete"
           onClick={e => this.removeClick(e, i)}
+          className="remove_ingredient_button"
         />
       </div>
     ));
@@ -276,57 +282,70 @@ export default class EditRecipePage extends Component {
     const { name, description, instructions } = this.state;
     return (
       <section>
-        <h2>Add your recipe using the form below:</h2>
+        <h2>Edit your recipe using the form below:</h2>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="recipe-name-input">Recipe Name</label>
-          <input
-            type="text"
-            id="recipe-name-input"
-            onChange={e => this.updatename(e.target.value)}
-            minLength="3"
-            maxLength="60"
-            required
-            value={name}
-          />
-          <ValidationError
-            hasError={!this.state.nameValid}
-            message={this.state.validationMessages.name}
-          />
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            onChange={e => this.updateDescription(e.target.value)}
-            minLength="3"
-            maxLength="400"
-            value={description}
-          />
-          <ValidationError
-            hasError={!this.state.descriptionValid}
-            message={this.state.validationMessages.description}
-          />
-          <label htmlFor="instructions">Instructions</label>
-          <textarea
-            id="instructions"
-            onChange={e => this.updateInstructions(e.target.value)}
-            minLength="3"
-            maxLength="4000"
-            value={instructions}
-          />
-          <ValidationError
-            hasError={!this.state.instructionsValid}
-            message={this.state.validationMessages.instructions}
-          />
-          <label>Ingredients</label>
-          {this.ingredientsInputs()}
-          <ValidationError
-            hasError={!this.state.quantityValid}
-            message={this.state.validationMessages.quantity}
-          />
-          <input type="button" value="Add Ingredient" onClick={this.addClick} />
+          <div className="recipe_inputs">
+            <label htmlFor="recipe-name-input">Recipe Name</label>
+            <input
+              type="text"
+              id="recipe-name-input"
+              onChange={e => this.updatename(e.target.value)}
+              minLength="3"
+              maxLength="42"
+              required
+              value={name}
+              className="recipe_name recipe_input"
+            />
+            <ValidationError
+              hasError={!this.state.nameValid}
+              message={this.state.validationMessages.name}
+            />
+            <label htmlFor="description">Description</label>
+            <textarea
+              id="description"
+              onChange={e => this.updateDescription(e.target.value)}
+              minLength="3"
+              maxLength="400"
+              value={description}
+              className="description recipe_input"
+            />
+            <ValidationError
+              hasError={!this.state.descriptionValid}
+              message={this.state.validationMessages.description}
+            />
+            <label htmlFor="instructions">Instructions</label>
+            <textarea
+              id="instructions"
+              onChange={e => this.updateInstructions(e.target.value)}
+              minLength="3"
+              maxLength="4000"
+              value={instructions}
+              className="instructions recipe_input"
+            />
+            <ValidationError
+              hasError={!this.state.instructionsValid}
+              message={this.state.validationMessages.instructions}
+            />
+            <label>Ingredients</label>
+            <div className="ingredients_section">
+              {this.ingredientsInputs()}
+              <ValidationError
+                hasError={!this.state.quantityValid}
+                message={this.state.validationMessages.quantity}
+              />
+            </div>
+            <input
+              type="button"
+              value="Add Ingredient"
+              onClick={this.addClick}
+              className="add_ingredient_button"
+            />
+          </div>
           <input
             type="submit"
             value="Submit"
             disabled={!this.state.formValid}
+            className="submit_button"
           />
         </form>
       </section>

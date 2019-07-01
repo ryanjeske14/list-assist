@@ -71,7 +71,10 @@ export default class RecipePage extends Component {
           ) : (
             <></>
           )}
-          <button className="recipe_button" onClick={this.handleClickBack}>
+          <button
+            className="recipe_button back_to_recipes"
+            onClick={this.handleClickBack}
+          >
             Back to Recipes
           </button>
         </div>
