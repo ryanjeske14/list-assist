@@ -42,9 +42,11 @@ export default class Header extends Component {
   render() {
     return (
       <nav className="Header">
-        <h1>
-          <Link to="/">List Assist</Link>
-        </h1>
+        <div className="logo">
+          <Link to="/">
+            <img src="/img/logo-2.png" alt="logo" />
+          </Link>
+        </div>
         {this.context.loggedIn
           ? this.renderLogoutLink()
           : this.renderLoginLink()}

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import AppContext from "../../AppContext";
 import "./AddRecipePage.css";
 import ValidationError from "../../components/ValidationError/ValidationError";
+import { Required } from "../../components/Utils/Utils";
 
 export default class AddRecipePage extends Component {
   static contextType = AppContext;
@@ -62,8 +63,8 @@ export default class AddRecipePage extends Component {
   ingredientsInputs() {
     const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
-      <div key={i}>
-        {/* <label htmlFor="name">Ingredient</label> */}
+      <div className="ingredient_inputs" key={i}>
+        <p className="ingredient_number">Ingredient {i + 1}</p>
         <input
           placeholder="Ingredient"
           id="name"
@@ -72,8 +73,8 @@ export default class AddRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           required
           maxLength="60"
+          className="ingredient_input"
         />
-        {/* <label htmlFor="quantity">Quantity</label> */}
         <input
           placeholder="Quantity"
           id="quantity"
@@ -82,21 +83,30 @@ export default class AddRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           required
           maxLength="10"
+          className="ingredient_input"
         />
-        {/* <label htmlFor="unit_id">Unit</label> */}
         <select
           name="unit_id"
           id="unit_id"
-          //value={el.unit || ""}
           onChange={e => this.handleChange(e, i)}
+          className="ingredient_input"
+          required
         >
+          <option
+            className="unit_placeholder"
+            value=""
+            selected
+            disabled
+            hidden
+          >
+            Unit
+          </option>
           {units.sort(this.sortUnits).map(unit => (
-            <option key={unit.id} value={unit.id}>
+            <option className="unit_option" key={unit.id} value={unit.id}>
               {unit.name}
             </option>
           ))}
         </select>
-        {/* <label htmlFor="special_instructions">Special Instructions</label> */}
         <input
           placeholder="Special Instructions (e.g., minced)"
           id="special_instructions"
@@ -104,11 +114,13 @@ export default class AddRecipePage extends Component {
           maxLength="30"
           value={el.special_instructions || ""}
           onChange={e => this.handleChange(e, i)}
+          className="ingredient_input"
         />
         <input
           type="button"
-          value="remove"
+          value="Delete"
           onClick={e => this.removeClick(e, i)}
+          className="remove_ingredient_button"
         />
       </div>
     ));
@@ -255,52 +267,71 @@ export default class AddRecipePage extends Component {
       <section>
         <h2>Add your recipe using the form below:</h2>
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="recipe-name-input">Recipe Name</label>
-          <input
-            type="text"
-            id="recipe-name-input"
-            onChange={e => this.updatename(e.target.value)}
-            minLength="3"
-            maxLength="60"
-            required
-          />
-          <ValidationError
-            hasError={!this.state.nameValid}
-            message={this.state.validationMessages.name}
-          />
-          <label htmlFor="description">Description</label>
-          <textarea
-            id="description"
-            onChange={e => this.updateDescription(e.target.value)}
-            minLength="3"
-            maxLength="400"
-          />
-          <ValidationError
-            hasError={!this.state.descriptionValid}
-            message={this.state.validationMessages.description}
-          />
-          <label htmlFor="instructions">Instructions</label>
-          <textarea
-            id="instructions"
-            onChange={e => this.updateInstructions(e.target.value)}
-            minLength="3"
-            maxLength="4000"
-          />
-          <ValidationError
-            hasError={!this.state.instructionsValid}
-            message={this.state.validationMessages.instructions}
-          />
-          <label>Ingredients</label>
-          {this.ingredientsInputs()}
-          <ValidationError
-            hasError={!this.state.quantityValid}
-            message={this.state.validationMessages.quantity}
-          />
-          <input type="button" value="Add Ingredient" onClick={this.addClick} />
+          <div className="recipe_inputs">
+            <label htmlFor="recipe-name-input">
+              Recipe Name <Required />
+            </label>
+            <input
+              type="text"
+              id="recipe-name-input"
+              onChange={e => this.updatename(e.target.value)}
+              minLength="3"
+              maxLength="42"
+              required
+              className="recipe_name recipe_input"
+            />{" "}
+            <ValidationError
+              hasError={!this.state.nameValid}
+              message={this.state.validationMessages.name}
+            />
+            <label htmlFor="description">
+              Description <Required />
+            </label>
+            <textarea
+              id="description"
+              onChange={e => this.updateDescription(e.target.value)}
+              minLength="3"
+              maxLength="400"
+              className="description recipe_input"
+            />
+            <ValidationError
+              hasError={!this.state.descriptionValid}
+              message={this.state.validationMessages.description}
+            />
+            <label htmlFor="instructions">
+              Instructions <Required />
+            </label>
+            <textarea
+              id="instructions"
+              onChange={e => this.updateInstructions(e.target.value)}
+              minLength="3"
+              maxLength="4000"
+              className="instructions recipe_input"
+            />
+            <ValidationError
+              hasError={!this.state.instructionsValid}
+              message={this.state.validationMessages.instructions}
+            />
+            <label>Ingredients</label>
+            <div className="ingredients_section">
+              {this.ingredientsInputs()}
+              <ValidationError
+                hasError={!this.state.quantityValid}
+                message={this.state.validationMessages.quantity}
+              />
+            </div>
+            <input
+              type="button"
+              value="Add Ingredient"
+              onClick={this.addClick}
+              className="add_ingredient_button"
+            />
+          </div>
           <input
             type="submit"
             value="Submit"
             disabled={!this.state.formValid}
+            className="submit_button"
           />
         </form>
       </section>

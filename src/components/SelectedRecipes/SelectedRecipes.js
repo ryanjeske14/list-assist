@@ -1,19 +1,44 @@
 import React, { Component } from "react";
 import AppContext from "../../AppContext";
 import { findSelected } from "../../function-helpers";
+import "./SelectedRecipes.css";
 
 export default class SelectedRecipes extends Component {
   static contextType = AppContext;
+
+  handleAddToList = recipeId => {
+    this.context.addToSelected(recipeId);
+  };
+
+  handleRemoveFromList = recipeId => {
+    this.context.removeFromSelected(recipeId);
+  };
 
   render() {
     const { recipes, selected } = this.context;
     const selectedRecipes = findSelected(recipes, selected);
 
     return (
-      <ul>
+      <ul className="selected_list">
         {selectedRecipes.map(recipe => (
-          <li key={recipe.id}>
-            {recipe.name} x {recipe.quantity}
+          <li className="selected_li" key={recipe.id}>
+            <p className="recipe_name_qty">
+              {recipe.name} &nbsp; x {recipe.quantity}
+            </p>
+            <div className="recipe_select_buttons">
+              <button
+                className="add_selected_button"
+                onClick={() => this.handleAddToList(recipe.id)}
+              >
+                +
+              </button>
+              <button
+                className="remove_selected_button"
+                onClick={() => this.handleRemoveFromList(recipe.id)}
+              >
+                -
+              </button>
+            </div>
           </li>
         ))}
       </ul>

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import AppContext from "../../AppContext";
 import { findRecipe } from "../../function-helpers";
+import "./RecipePage.css";
 
 export default class RecipePage extends Component {
   static contextType = AppContext;
@@ -30,16 +31,16 @@ export default class RecipePage extends Component {
     const ingredients = recipe.ingredients || [];
 
     return (
-      <section>
-        <h2>{recipe.name}</h2>
+      <section className="recipe_section">
+        <h1 className="recipe_name">{recipe.name}</h1>
         <h3>Description:</h3>
-        <div>
+        <div className="recipe_description">
           {recipeDescription.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;
           })}
         </div>
         <h3>Ingredients:</h3>
-        <ul>
+        <ul className="ingredients_list">
           {ingredients.map(ingredient => (
             <li key={ingredient.id}>
               {new Fraction(ingredient.quantity).toFraction(true)}{" "}
@@ -50,24 +51,33 @@ export default class RecipePage extends Component {
           ))}
         </ul>
         <h3>Instructions:</h3>
-        <div>
+        <div className="recipe_instructions">
           {recipeInstructions.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;
           })}
         </div>
-        {this.context.user.id === recipe.owner_id ? (
-          <button onClick={this.handleClickDelete}>Delete Recipe</button>
-        ) : (
-          <></>
-        )}
-        {this.context.user.id === recipe.owner_id ? (
-          <button>
-            <Link to={`/edit-recipe/${recipe.id}`}>Edit Recipe</Link>
+        <div className="recipe_buttons">
+          {this.context.user.id === recipe.owner_id ? (
+            <Link className="edit_recipe_link" to={`/edit-recipe/${recipe.id}`}>
+              Edit Recipe
+            </Link>
+          ) : (
+            <></>
+          )}
+          {this.context.user.id === recipe.owner_id ? (
+            <button className="recipe_button" onClick={this.handleClickDelete}>
+              Delete Recipe
+            </button>
+          ) : (
+            <></>
+          )}
+          <button
+            className="recipe_button back_to_recipes"
+            onClick={this.handleClickBack}
+          >
+            Back to Recipes
           </button>
-        ) : (
-          <></>
-        )}
-        <button onClick={this.handleClickBack}>Back to Recipes</button>
+        </div>
       </section>
     );
   }

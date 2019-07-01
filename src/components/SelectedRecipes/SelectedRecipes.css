@@ -1,0 +1,47 @@
+.selected_list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0;
+    margin-top: 5;
+}
+
+.selected_li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 6px 0;
+}
+
+.recipe_name_qty {
+    margin: 10px;
+
+}
+
+.add_selected_button, .remove_selected_button {
+    background-color: #F39305;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    display: inline-block;
+    margin: 20px auto;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    margin: 0 0 0 10px;
+    width: 41px;
+    height: 41px;
+    font-size: 25px;
+    outline: none;
+  }
+  
+  .remove_selected_button:hover, .add_selected_button:hover {
+    background-color: #F03C05;
+    outline: none;
+  }
+
+  .recipe_select_buttons {
+      min-width: 102px;
+  }
+  

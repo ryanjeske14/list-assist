@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import AuthApiService from "../../services/auth-api-service";
 import { Button, Input } from "../Utils/Utils";
+import "./LoginForm.css";
 
 export default class LoginForm extends Component {
   static defaultProps = {
@@ -46,7 +47,9 @@ export default class LoginForm extends Component {
             id="LoginForm__password"
           />
         </div>
-        <Button type="submit">Login</Button>
+        <Button className="login_button" type="submit">
+          Login
+        </Button>
       </form>
     );
   }
