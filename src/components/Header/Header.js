@@ -46,11 +46,7 @@ export default class Header extends Component {
       <nav className="Header">
         <div className="logo">
           <Link to="/">
-<<<<<<< HEAD
-            <img src="../../img/logo-2.png" alt="logo" />
-=======
             <img src="/img/logo-2.png" alt="logo" />
->>>>>>> parent of b5469a8... changing img src property for Zeit deploy
           </Link>
         </div>
         {this.context.loggedIn
