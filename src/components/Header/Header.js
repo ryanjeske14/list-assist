@@ -46,7 +46,7 @@ export default class Header extends Component {
       <nav className="Header">
         <div className="logo">
           <Link to="/">
-            <img src="img/logo-2.png" alt="logo" />
+            <img src="../../img/logo-2.png" alt="logo" />
           </Link>
         </div>
         {this.context.loggedIn

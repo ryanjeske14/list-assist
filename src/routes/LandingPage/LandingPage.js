@@ -21,7 +21,7 @@ export default class LandingPage extends Component {
             is made for you, giving you back time for the things that matter
             most.
           </p>
-          <img className="landing_logo" src="img/icon-2.png" alt="icon" />
+          <img className="landing_logo" src="../../img/icon-2.png" alt="icon" />
         </section>
 
         <section>
