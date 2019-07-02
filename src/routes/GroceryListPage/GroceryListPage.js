@@ -24,6 +24,7 @@ export default class GroceryListPage extends Component {
           const newValue = new Fraction(recipeQuantity)
             .mul(ingredient.quantity)
             .add(oldValue)
+            .simplify()
             .toFraction(true);
           map.set(key, newValue);
         }

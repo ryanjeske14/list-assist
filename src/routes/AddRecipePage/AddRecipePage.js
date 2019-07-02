@@ -91,9 +91,8 @@ export default class AddRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           className="ingredient_input"
           required
-          value=""
         >
-          <option className="unit_placeholder" value="" disabled hidden>
+          <option className="unit_placeholder" value="" hidden>
             Unit
           </option>
           {units.sort(this.sortUnits).map(unit => (
@@ -286,7 +285,7 @@ export default class AddRecipePage extends Component {
               id="description"
               onChange={e => this.updateDescription(e.target.value)}
               minLength="3"
-              maxLength="400"
+              maxLength="1500"
               className="description recipe_input"
             />
             <ValidationError

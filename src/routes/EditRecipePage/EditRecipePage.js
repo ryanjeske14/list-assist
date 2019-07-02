@@ -309,7 +309,7 @@ export default class EditRecipePage extends Component {
               id="description"
               onChange={e => this.updateDescription(e.target.value)}
               minLength="3"
-              maxLength="400"
+              maxLength="1500"
               value={description}
               className="description recipe_input"
             />

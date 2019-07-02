@@ -41,9 +41,9 @@ export default class RecipePage extends Component {
         </div>
         <h3>Ingredients:</h3>
         <ul className="ingredients_list">
-          {ingredients.map(ingredient => (
-            <li key={ingredient.id}>
-              {new Fraction(ingredient.quantity).toFraction(true)}{" "}
+          {ingredients.map((ingredient, i) => (
+            <li key={i}>
+              {new Fraction(ingredient.quantity).simplify().toFraction(true)}{" "}
               {ingredient.unit} {ingredient.name}
               {ingredient.special_instructions ? ", " : ""}
               {ingredient.special_instructions}
