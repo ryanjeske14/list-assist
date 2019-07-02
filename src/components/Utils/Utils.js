@@ -9,7 +9,11 @@ export function NiceDate({ date, format = "Do MMMM YYYY" }) {
 export function Hyph() {
   return (
     <span className="Hyph">
+<<<<<<< HEAD
       <img src="../../img/icon-3.png" alt="icon" className="hyph_icon" />
+=======
+      <img src="/img/icon-3.png" alt="icon" className="hyph_icon" />
+>>>>>>> parent of b5469a8... changing img src property for Zeit deploy
     </span>
   );
 }
