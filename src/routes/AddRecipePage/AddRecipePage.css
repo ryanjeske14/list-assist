@@ -46,7 +46,7 @@
   }
 
   .add_ingredient_button, .remove_ingredient_button {
-    background-color: #F39305;
+    background-color: #EE9300;
     border-radius: 2px;
     border: none;
     font-size: 20px;
@@ -125,15 +125,17 @@
       width: 95%;
       margin: 0 auto;
     }
+    .form_label:not(:first-child) {
+      margin: 10px auto 0px auto;
+    }
     .ingredients_section {
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         justify-content: center;
-        margin-top: 2px;
     }
     .ingredient_inputs {
       width: 45%;
       margin: 15px 15px;
     }
-}
+  }

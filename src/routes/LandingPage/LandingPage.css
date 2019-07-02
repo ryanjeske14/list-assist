@@ -22,7 +22,7 @@ body {
   }
 
   .banner {
-    background: linear-gradient( rgba(0, 0, 0, 0.514), rgba(0, 0, 0, 0.418) ), url(/img/banner.png);
+    background: linear-gradient( rgba(0, 0, 0, 0.514), rgba(0, 0, 0, 0.418) ), url(/img/banner.jpg);
     background-size: cover;
     background-position: center;
     display: flex;
@@ -41,7 +41,7 @@ body {
     margin-left: auto;
     margin-right: auto;
     border-radius: 3%;
-    background-color: #F39305;
+    background-color: #EE9300;
     transition: all 0.3s ease-in-out;
     border: none;
   }

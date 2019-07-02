@@ -91,14 +91,9 @@ export default class AddRecipePage extends Component {
           onChange={e => this.handleChange(e, i)}
           className="ingredient_input"
           required
+          value=""
         >
-          <option
-            className="unit_placeholder"
-            value=""
-            selected
-            disabled
-            hidden
-          >
+          <option className="unit_placeholder" value="" disabled hidden>
             Unit
           </option>
           {units.sort(this.sortUnits).map(unit => (
@@ -268,7 +263,7 @@ export default class AddRecipePage extends Component {
         <h2>Add your recipe using the form below:</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="recipe_inputs">
-            <label htmlFor="recipe-name-input">
+            <label htmlFor="recipe-name-input" className="form_label">
               Recipe Name <Required />
             </label>
             <input
@@ -276,7 +271,7 @@ export default class AddRecipePage extends Component {
               id="recipe-name-input"
               onChange={e => this.updatename(e.target.value)}
               minLength="3"
-              maxLength="42"
+              maxLength="60"
               required
               className="recipe_name recipe_input"
             />{" "}
@@ -284,7 +279,7 @@ export default class AddRecipePage extends Component {
               hasError={!this.state.nameValid}
               message={this.state.validationMessages.name}
             />
-            <label htmlFor="description">
+            <label htmlFor="description" className="form_label">
               Description <Required />
             </label>
             <textarea
@@ -298,7 +293,7 @@ export default class AddRecipePage extends Component {
               hasError={!this.state.descriptionValid}
               message={this.state.validationMessages.description}
             />
-            <label htmlFor="instructions">
+            <label htmlFor="instructions" className="form_label">
               Instructions <Required />
             </label>
             <textarea
@@ -312,7 +307,7 @@ export default class AddRecipePage extends Component {
               hasError={!this.state.instructionsValid}
               message={this.state.validationMessages.instructions}
             />
-            <label>Ingredients</label>
+            <label className="form_label">Ingredients</label>
             <div className="ingredients_section">
               {this.ingredientsInputs()}
               <ValidationError

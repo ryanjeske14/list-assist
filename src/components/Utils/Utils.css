@@ -1,7 +1,12 @@
 
 .Hyph {
-  margin-right: 5px;
-  margin-left: 5px;
+  margin-right: 10px;
+  margin-left: 10px;
+}
+
+.hyph_icon {
+  width: 15px;
+
 }
 
 .Input,

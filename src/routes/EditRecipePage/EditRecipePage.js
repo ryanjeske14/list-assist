@@ -285,13 +285,15 @@ export default class EditRecipePage extends Component {
         <h2>Edit your recipe using the form below:</h2>
         <form onSubmit={this.handleSubmit}>
           <div className="recipe_inputs">
-            <label htmlFor="recipe-name-input">Recipe Name</label>
+            <label htmlFor="recipe-name-input" className="form_label">
+              Recipe Name
+            </label>
             <input
               type="text"
               id="recipe-name-input"
               onChange={e => this.updatename(e.target.value)}
               minLength="3"
-              maxLength="42"
+              maxLength="60"
               required
               value={name}
               className="recipe_name recipe_input"
@@ -300,7 +302,9 @@ export default class EditRecipePage extends Component {
               hasError={!this.state.nameValid}
               message={this.state.validationMessages.name}
             />
-            <label htmlFor="description">Description</label>
+            <label htmlFor="description" className="form_label">
+              Description
+            </label>
             <textarea
               id="description"
               onChange={e => this.updateDescription(e.target.value)}
@@ -313,7 +317,9 @@ export default class EditRecipePage extends Component {
               hasError={!this.state.descriptionValid}
               message={this.state.validationMessages.description}
             />
-            <label htmlFor="instructions">Instructions</label>
+            <label htmlFor="instructions" className="form_label">
+              Instructions
+            </label>
             <textarea
               id="instructions"
               onChange={e => this.updateInstructions(e.target.value)}
@@ -326,7 +332,7 @@ export default class EditRecipePage extends Component {
               hasError={!this.state.instructionsValid}
               message={this.state.validationMessages.instructions}
             />
-            <label>Ingredients</label>
+            <label className="form_label">Ingredients</label>
             <div className="ingredients_section">
               {this.ingredientsInputs()}
               <ValidationError
