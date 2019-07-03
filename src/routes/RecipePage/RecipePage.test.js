@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import RecipePage from "./RecipePage";
+import { BrowserRouter } from "react-router-dom";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
@@ -10,6 +11,11 @@ it("renders without crashing", () => {
       push: () => {}
     }
   };
-  ReactDOM.render(<RecipePage {...props} />, div);
+  ReactDOM.render(
+    <BrowserRouter>
+      <RecipePage {...props} />
+    </BrowserRouter>,
+    div
+  );
   ReactDOM.unmountComponentAtNode(div);
 });
