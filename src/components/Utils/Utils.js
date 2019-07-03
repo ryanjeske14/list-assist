@@ -1,6 +1,7 @@
 import React from "react";
 import { format as formatDate } from "date-fns";
 import "./Utils.css";
+const icon = require("../../img/icon-3.png");
 
 export function NiceDate({ date, format = "Do MMMM YYYY" }) {
   return formatDate(date, format);
@@ -9,7 +10,7 @@ export function NiceDate({ date, format = "Do MMMM YYYY" }) {
 export function Hyph() {
   return (
     <span className="Hyph">
-      <img src="/img/icon-3.png" alt="icon" className="hyph_icon" />
+      <img src={icon} alt="icon" className="hyph_icon" />
     </span>
   );
 }
