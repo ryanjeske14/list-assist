@@ -41,7 +41,7 @@ export default class GroceryListPage extends Component {
 
     return (
       <section className="grocery_list_section">
-        <h1>Grocery List</h1>
+        <h1 className="grocery_list_header">Grocery List</h1>
         <ul className="grocery_list">
           {groceryList.map((grocery, i) => (
             <li className="grocery_li" key={i}>

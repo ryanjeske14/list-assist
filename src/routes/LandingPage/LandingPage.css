@@ -64,9 +64,36 @@ body {
     width: 90px;
   }
 
+  .landing_section {
+    padding-bottom: 0;
+  }
+
+  .landing_img {
+    border-radius: 50%;
+    width: 70%;
+    margin-top: 30px;
+  }
+
+  .get_started_section {
+    margin-top: 30px;
+  }
+
+  .cwcr_link {
+    color: rgb(190, 44, 0);
+    text-decoration: none;
+  }
+
+  .cwcr_link:hover {
+    font-weight: bold;
+  }
+
   @media screen and (min-width: 520px) {
     .banner h2 {
       font-size: 35px;
+    }
+    .landing_img {
+      width: 55%;
+      max-width: 400px;
     }
   }
   
