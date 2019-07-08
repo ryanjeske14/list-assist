@@ -4,7 +4,7 @@
     align-items: center;
     background-color: white;
     margin: 0% 4% 0% 4%;
-    padding-bottom: 60px;
+    padding-bottom: 90px;
 }
 
 .selected {
@@ -40,3 +40,31 @@
 .gl_link_div {
     margin-top: 50px;
 }
+
+.back_to_top_button {
+    position: fixed;
+    bottom: 20px;
+    right: 30px;
+    background-color: #F03C05;
+    border-radius: 50%;
+    border: none;
+    font-size: 20px;
+    color: white;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    width: 41px;
+    height: 41px;
+    font-size: 25px;
+    outline: none;
+    padding-bottom: 5px;
+}
+
+.back_to_top_button:hover {
+    outline: none;
+}
+
+@media screen and (max-width: 520px) {
+    .recipes_page_header {
+        font-size: 25px;
+    }
+  }

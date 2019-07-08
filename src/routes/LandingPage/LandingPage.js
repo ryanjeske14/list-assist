@@ -21,7 +21,7 @@ export default class LandingPage extends Component {
           <p>
             No more spending time figuring out which groceries you need in order
             to make your favorite recipes. With List Assist, your grocery list
-            is made for you, giving you back time for the things that matter
+            is made for you, giving you more time for the things that matter
             most.
           </p>
           <img className="landing_logo" src={icon} alt="icon" />

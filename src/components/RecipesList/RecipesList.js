@@ -8,6 +8,8 @@ export default class RecipesList extends Component {
 
   handleAddToList = recipeId => {
     this.context.addToSelected(recipeId);
+    const element = document.querySelector(".recipes_page");
+    element.scrollIntoView({ behavior: "smooth", block: "end" });
   };
 
   render() {

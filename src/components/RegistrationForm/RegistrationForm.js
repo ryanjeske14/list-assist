@@ -35,26 +35,16 @@ export default class RegistrationForm extends Component {
       <form className="RegistrationForm" onSubmit={this.handleSubmit}>
         <div role="alert">{error && <p className="red">{error}</p>}</div>
         <div className="user_name">
-          <label htmlFor="RegistrationForm__user_name">
+          <label htmlFor="user_name">
             User name <Required />
           </label>
-          <Input
-            name="user_name"
-            type="text"
-            required
-            id="RegistrationForm__user_name"
-          />
+          <Input name="user_name" type="text" required id="user_name" />
         </div>
         <div className="password">
-          <label htmlFor="RegistrationForm__password">
+          <label htmlFor="password">
             Password <Required />
           </label>
-          <Input
-            name="password"
-            type="password"
-            required
-            id="RegistrationForm__password"
-          />
+          <Input name="password" type="password" required id="password" />
         </div>
         <Button className="registration_button" type="submit">
           Register

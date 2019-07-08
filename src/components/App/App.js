@@ -18,7 +18,6 @@ import RecipesApiService from "../../services/recipes-api-service";
 import TokenService from "../../services/token-service";
 import AuthApiService from "../../services/auth-api-service";
 import IdleService from "../../services/idle-service";
-import "./App.css";
 
 class App extends Component {
   state = {
@@ -196,7 +195,7 @@ class App extends Component {
     return (
       <AppContext.Provider value={contextValue}>
         <div className="App">
-          <header className="App__header">
+          <header>
             <Header />
           </header>
           <main className="App">

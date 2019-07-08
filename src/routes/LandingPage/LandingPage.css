@@ -50,7 +50,6 @@ body {
     background-color: #F03C05;
     color: white;
     cursor: pointer;
-    width: 350px;
   }
 
   .get_started a {
@@ -84,7 +83,7 @@ body {
   }
 
   .cwcr_link:hover {
-    font-weight: bold;
+    text-decoration: underline;
   }
 
   @media screen and (min-width: 520px) {

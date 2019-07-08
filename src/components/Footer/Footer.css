@@ -18,7 +18,7 @@ footer a {
 }
 
 .name:hover {
-    font-weight: bold;
+    color: rgb(190, 44, 0);
     cursor: pointer;
 }
 

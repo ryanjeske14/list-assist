@@ -8,6 +8,11 @@ import "./RecipesPage.css";
 export default class RecipesPage extends Component {
   static contextType = AppContext;
 
+  handleTopClick = () => {
+    const element = document.querySelector(".select_recipes_div");
+    element.scrollIntoView({ behavior: "smooth" });
+  };
+
   render() {
     const { selected } = this.context;
 
@@ -26,7 +31,9 @@ export default class RecipesPage extends Component {
         </div>
 
         <div className="selected_recipes_div">
-          <h2 className="recipes_page_header">Selected Recipes:</h2>
+          <h2 className="recipes_page_header selected_header">
+            Selected Recipes:
+          </h2>
 
           {Object.entries(selected).length !== 0 ? (
             <div>
@@ -41,6 +48,9 @@ export default class RecipesPage extends Component {
           ) : (
             <></>
           )}
+          <button className="back_to_top_button" onClick={this.handleTopClick}>
+            &uarr;
+          </button>
         </div>
       </section>
     );
