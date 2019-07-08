@@ -6,10 +6,12 @@ import "./SelectedRecipes.css";
 export default class SelectedRecipes extends Component {
   static contextType = AppContext;
 
+  // calls function when + sign is clicked to update recipe quantity
   handleAddToList = recipeId => {
     this.context.addToSelected(recipeId);
   };
 
+  // calls function when - sign is clicked to update recipe quantity
   handleRemoveFromList = recipeId => {
     this.context.removeFromSelected(recipeId);
   };

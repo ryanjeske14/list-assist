@@ -8,6 +8,7 @@ export default class RecipesList extends Component {
 
   handleAddToList = recipeId => {
     this.context.addToSelected(recipeId);
+    // scroll to bottom  of page when recipe is added to list so users on small screens can see that the list has updated
     const element = document.querySelector(".recipes_page");
     element.scrollIntoView({ behavior: "smooth", block: "end" });
   };

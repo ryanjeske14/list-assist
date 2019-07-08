@@ -12,11 +12,12 @@ export default class Header extends Component {
 
   handleLogoutClick = async () => {
     TokenService.clearAuthToken();
-    /* when logging out, clear the callbacks to the refresh api and idle auto logout */
+    // when logging out, clear the callbacks to the refresh api and idle auto logout
     TokenService.clearCallbackBeforeExpiry();
     IdleService.unRegisterIdleResets();
     await this.context.setLoggedIn();
     await this.context.setUser({});
+    // calls function to reload recipe data so that previous user's recipes are no longer accessible
     this.context.loadUserRecipes();
   };
 

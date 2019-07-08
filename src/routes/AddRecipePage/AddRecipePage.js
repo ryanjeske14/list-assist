@@ -30,6 +30,7 @@ export default class AddRecipePage extends Component {
     };
   }
 
+  // callback function to add new set of ingredient inputs
   addClick = () => {
     this.setState(prevState => ({
       ingredients: [
@@ -39,6 +40,7 @@ export default class AddRecipePage extends Component {
     }));
   };
 
+  // callback function to remove ingredient from recipe form
   removeClick = (e, i) => {
     let ingredients = [...this.state.ingredients];
     if (ingredients.length > 1) {
@@ -47,6 +49,7 @@ export default class AddRecipePage extends Component {
     } else alert("Must have at least one ingredient.");
   };
 
+  // sorts units alphabetically for <select> units dropdown
   sortUnits = (a, b) => {
     const unitA = a.name.toUpperCase();
     const unitB = b.name.toUpperCase();
@@ -60,7 +63,8 @@ export default class AddRecipePage extends Component {
     return comparison;
   };
 
-  ingredientsInputs() {
+  // creates UI for ingredients section of recipe form
+  renderIngredientsInputs() {
     const { units = [] } = this.context;
     return this.state.ingredients.map((el, i) => (
       <div className="ingredient_inputs" key={i}>
@@ -70,7 +74,7 @@ export default class AddRecipePage extends Component {
           id="name"
           name="name"
           value={el.name || ""}
-          onChange={e => this.handleChange(e, i)}
+          onChange={e => this.handleChangeIngredients(e, i)}
           required
           maxLength="60"
           className="ingredient_input"
@@ -80,7 +84,7 @@ export default class AddRecipePage extends Component {
           id="quantity"
           name="quantity"
           value={el.quantity || ""}
-          onChange={e => this.handleChange(e, i)}
+          onChange={e => this.handleChangeIngredients(e, i)}
           required
           maxLength="10"
           className="ingredient_input"
@@ -88,7 +92,7 @@ export default class AddRecipePage extends Component {
         <select
           name="unit_id"
           id="unit_id"
-          onChange={e => this.handleChange(e, i)}
+          onChange={e => this.handleChangeIngredients(e, i)}
           className="ingredient_input"
           required
         >
@@ -107,7 +111,7 @@ export default class AddRecipePage extends Component {
           name="special_instructions"
           maxLength="30"
           value={el.special_instructions || ""}
-          onChange={e => this.handleChange(e, i)}
+          onChange={e => this.handleChangeIngredients(e, i)}
           className="ingredient_input"
         />
         <input
@@ -120,27 +124,32 @@ export default class AddRecipePage extends Component {
     ));
   }
 
-  handleChange = (e, i) => {
+  // updates state of ingredients in controlled form whenever a value is changed
+  handleChangeIngredients = (e, i) => {
     const { name, value } = e.target;
     let ingredients = [...this.state.ingredients];
     ingredients[i] = { ...ingredients[i], [name]: value };
     this.setState({ ingredients }, () => this.validateIngredients(ingredients));
   };
 
+  // recipe name change handler that then calls validateName()
   updatename(name) {
     this.setState({ name }, () => this.validateName(name));
   }
 
+  // recipe description change handler that then calls validateDescription()
   updateDescription(description) {
     this.setState({ description }, () => this.validateDescription(description));
   }
 
+  // recipe instructions change handler that then calls validateInstructions()
   updateInstructions(instructions) {
     this.setState({ instructions }, () =>
       this.validateInstructions(instructions)
     );
   }
 
+  // recipe name validation
   validateName(fieldValue) {
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
@@ -159,6 +168,7 @@ export default class AddRecipePage extends Component {
     );
   }
 
+  // recipe description validation
   validateDescription(fieldValue) {
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
@@ -178,6 +188,7 @@ export default class AddRecipePage extends Component {
     );
   }
 
+  // recipe instructions validation
   validateInstructions(fieldValue) {
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
@@ -197,7 +208,9 @@ export default class AddRecipePage extends Component {
     );
   }
 
+  // ingredients validation
   validateIngredients(ingredients) {
+    // test quantity value vs REGEX to restrict format of numbers entered
     const REGEX_INTEGER_DECIMAL_FRACTION = /^[0-9]+[.]?[0-9]*([/][1-9]+[.]?[0-9]*)*$/;
     const fieldErrors = { ...this.state.validationMessages };
     let hasError = false;
@@ -221,6 +234,7 @@ export default class AddRecipePage extends Component {
     }
   }
 
+  // check if form is valid based on input validations
   formValid() {
     this.setState({
       formValid:
@@ -236,9 +250,11 @@ export default class AddRecipePage extends Component {
     const Fraction = require("fraction.js");
     const ingredients = this.state.ingredients;
 
+    // reformat ingredient inputs to ensure clean input values are passed to server to be stored in DB
     ingredients.forEach(ingredient => {
       ingredient.name = ingredient.name.trim();
       ingredient.unit_id = Number(ingredient.unit_id);
+      // used Fraction.js library from NPM to handle fraction and decimal values
       ingredient.quantity = new Fraction(ingredient.quantity).toFraction(true);
       if (ingredient.special_instructions)
         ingredient.special_instructions = ingredient.special_instructions.trim();
@@ -274,6 +290,7 @@ export default class AddRecipePage extends Component {
               required
               className="recipe_name recipe_input"
             />{" "}
+            {/* displays validation error if input is invalid */}
             <ValidationError
               hasError={!this.state.nameValid}
               message={this.state.validationMessages.name}
@@ -308,7 +325,7 @@ export default class AddRecipePage extends Component {
             />
             <label className="form_label">Ingredients</label>
             <div className="ingredients_section">
-              {this.ingredientsInputs()}
+              {this.renderIngredientsInputs()}
               <ValidationError
                 hasError={!this.state.quantityValid}
                 message={this.state.validationMessages.quantity}

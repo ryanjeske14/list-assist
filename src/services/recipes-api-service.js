@@ -2,6 +2,7 @@ import TokenService from "./token-service";
 import config from "../config";
 
 const RecipesApiService = {
+  // fetch request to get default recipes and recipes for current user
   getRecipes(userId) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
       headers: { userId: userId }
@@ -10,6 +11,7 @@ const RecipesApiService = {
     );
   },
 
+  // fetch request to get recipe data for specific recipe
   getRecipe(recipeId) {
     return fetch(`${config.API_ENDPOINT}/recipes/${recipeId}`, {
       headers: {}
@@ -20,6 +22,7 @@ const RecipesApiService = {
     });
   },
 
+  // fetch request to get list of units
   getUnits() {
     return fetch(`${config.API_ENDPOINT}/units`, {
       headers: {}
@@ -28,6 +31,7 @@ const RecipesApiService = {
     );
   },
 
+  // post request to insert new recipe in database
   postRecipe(recipe) {
     return fetch(`${config.API_ENDPOINT}/recipes`, {
       method: "POST",
@@ -43,6 +47,7 @@ const RecipesApiService = {
     );
   },
 
+  // delete request to delete recipe from database
   deleteRecipe(id) {
     return fetch(`${config.API_ENDPOINT}/recipes/${id}`, {
       method: "DELETE",
@@ -53,6 +58,7 @@ const RecipesApiService = {
     }).then(res => (!res.ok ? res.json().then(e => Promise.reject(e)) : res));
   },
 
+  // patch request to edit recipe in database
   editRecipe(recipe, ingredientsToDelete) {
     return fetch(`${config.API_ENDPOINT}/recipes/${recipe.id}`, {
       method: "PATCH",

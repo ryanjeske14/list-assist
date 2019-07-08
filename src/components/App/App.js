@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-//import ErrorBoundary from "../ErrorBoundary";
 import LandingPage from "../../routes/LandingPage/LandingPage";
 import RecipesPage from "../../routes/RecipesPage/RecipesPage";
 import RecipePage from "../../routes/RecipePage/RecipePage";
@@ -28,6 +27,7 @@ class App extends Component {
     user: {}
   };
 
+  // callback function to track selected recipes and associated quantities and update state accordingly
   handleAddToSelected = recipeId => {
     const selected = { ...this.state.selected };
     selected[recipeId] = selected[recipeId] + 1 || 1;
@@ -36,6 +36,7 @@ class App extends Component {
     });
   };
 
+  // callback function to decrement/remove selected recipe quantity and update state accordingly
   handleRemoveFromSelected = recipeId => {
     const selected = { ...this.state.selected };
     if (selected[recipeId]) {
@@ -50,6 +51,7 @@ class App extends Component {
     });
   };
 
+  // callback function for AddRecipePage form submission that initiates post request and updates state with new recipe if successful
   handleAddRecipe = recipe => {
     RecipesApiService.postRecipe(recipe).then(recipe =>
       this.setState({
@@ -58,6 +60,7 @@ class App extends Component {
     );
   };
 
+  // callback function to delete recipe that initiates delete request and updates state if successful
   handleDeleteRecipe = recipeId => {
     RecipesApiService.deleteRecipe(recipeId).then(
       this.setState({
@@ -66,8 +69,8 @@ class App extends Component {
     );
   };
 
+  // callback function for EditRecipePage form submission that initiates update request and updates state with new recipe if successful
   handleEditRecipe = (updatedRecipe, ingredientsToDelete) => {
-    console.log(updatedRecipe);
     RecipesApiService.editRecipe(updatedRecipe, ingredientsToDelete).then(
       this.setState({
         recipes: this.state.recipes.map(recipe =>
@@ -77,7 +80,9 @@ class App extends Component {
     );
   };
 
+  //
   async componentDidMount() {
+    // check if user is currently logged in, and if so, call setUser function to store user credentials
     await this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
@@ -91,12 +96,15 @@ class App extends Component {
       });
     }
 
+    // if user is not logged in, set user ID to 0 (guest)
     const userId = this.state.user.id || 0;
 
+    // retrieves recipes data and updates state
     RecipesApiService.getRecipes(userId).then(recipes =>
       this.setState({ recipes })
     );
 
+    // gets units data and stores in state
     RecipesApiService.getUnits().then(units => this.setState({ units: units }));
 
     /*
@@ -154,18 +162,21 @@ class App extends Component {
     });
   };
 
+  // check if user is logged in and update state accordingly
   setLoggedIn = () => {
     this.setState({
       loggedIn: TokenService.hasAuthToken()
     });
   };
 
+  // store user credentials in state
   setUser = user => {
     this.setState({
       user
     });
   };
 
+  // retrieve recipes for current user
   loadUserRecipes = () => {
     const userId = this.state.user.id || 0;
 
