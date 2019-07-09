@@ -55,13 +55,9 @@
     width: 41px;
     height: 41px;
     font-size: 25px;
-    outline: none;
     padding-bottom: 5px;
 }
 
-.back_to_top_button:hover {
-    outline: none;
-}
 
 @media screen and (max-width: 520px) {
     .recipes_page_header {

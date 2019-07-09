@@ -33,18 +33,36 @@ export default class RegistrationForm extends Component {
     const { error } = this.state;
     return (
       <form className="RegistrationForm" onSubmit={this.handleSubmit}>
-        <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div id="registrationError" role="alert">
+          {error && <p className="red">{error}</p>}
+        </div>
         <div className="user_name">
           <label htmlFor="user_name">
             User name <Required />
           </label>
-          <Input name="user_name" type="text" required id="user_name" />
+          <Input
+            name="user_name"
+            type="text"
+            required
+            id="user_name"
+            aria-required="true"
+            aria-label="user name"
+            aria-describedby="registrationError"
+          />
         </div>
         <div className="password">
           <label htmlFor="password">
             Password <Required />
           </label>
-          <Input name="password" type="password" required id="password" />
+          <Input
+            name="password"
+            type="password"
+            required
+            id="password"
+            aria-required="true"
+            aria-label="password"
+            aria-describedby="registrationError"
+          />
         </div>
         <Button className="registration_button" type="submit">
           Register

@@ -33,14 +33,31 @@ export default class LoginForm extends Component {
     const { error } = this.state;
     return (
       <form className="LoginForm" onSubmit={this.handleSubmitJwtAuth}>
-        <div role="alert">{error && <p className="red">{error}</p>}</div>
+        <div id="loginError" role="alert">
+          {error && <p className="red">{error}</p>}
+        </div>
         <div className="user_name">
           <label htmlFor="user_name">User name</label>
-          <Input required name="user_name" id="user_name" />
+          <Input
+            required
+            name="user_name"
+            id="user_name"
+            aria-required="true"
+            aria-label="user name"
+            aria-describedby="loginError"
+          />
         </div>
         <div className="password">
           <label htmlFor="password">Password</label>
-          <Input required name="password" type="password" id="password" />
+          <Input
+            required
+            name="password"
+            type="password"
+            id="password"
+            aria-required="true"
+            aria-label="password"
+            aria-describedby="loginError"
+          />
         </div>
         <Button className="login_button" type="submit">
           Login

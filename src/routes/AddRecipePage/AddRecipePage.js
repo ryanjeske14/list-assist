@@ -69,57 +69,79 @@ export default class AddRecipePage extends Component {
     return this.state.ingredients.map((el, i) => (
       <div className="ingredient_inputs" key={i}>
         <p className="ingredient_number">Ingredient {i + 1}</p>
-        <input
-          placeholder="Ingredient"
-          id="name"
-          name="name"
-          value={el.name || ""}
-          onChange={e => this.handleChangeIngredients(e, i)}
-          required
-          maxLength="60"
-          className="ingredient_input"
-        />
-        <input
-          placeholder="Quantity"
-          id="quantity"
-          name="quantity"
-          value={el.quantity || ""}
-          onChange={e => this.handleChangeIngredients(e, i)}
-          required
-          maxLength="10"
-          className="ingredient_input"
-        />
-        <select
-          name="unit_id"
-          id="unit_id"
-          onChange={e => this.handleChangeIngredients(e, i)}
-          className="ingredient_input"
-          required
-        >
-          <option className="unit_placeholder" value="" hidden>
+        <fieldset className="ingredient_fieldset">
+          <label htmlFor="name" style={{ display: "none" }}>
+            Name
+          </label>
+          <input
+            placeholder="Ingredient"
+            id="name"
+            name="name"
+            value={el.name || ""}
+            onChange={e => this.handleChangeIngredients(e, i)}
+            required
+            maxLength="60"
+            className="ingredient_input"
+            aria-required="true"
+            aria-label="Ingredient Name"
+          />
+          <label htmlFor="quantity" style={{ display: "none" }}>
+            Quantity
+          </label>
+          <input
+            placeholder="Quantity"
+            id="quantity"
+            name="quantity"
+            value={el.quantity || ""}
+            onChange={e => this.handleChangeIngredients(e, i)}
+            required
+            maxLength="10"
+            className="ingredient_input"
+            aria-required="true"
+            aria-label="Ingredient Quantity"
+            aria-describedby="ingredientError"
+          />
+          <label htmlFor="unit_id" style={{ display: "none" }}>
             Unit
-          </option>
-          {units.sort(this.sortUnits).map(unit => (
-            <option className="unit_option" key={unit.id} value={unit.id}>
-              {unit.name}
+          </label>
+          <select
+            name="unit_id"
+            id="unit_id"
+            onChange={e => this.handleChangeIngredients(e, i)}
+            className="ingredient_input"
+            required
+            aria-required="true"
+            aria-label="Ingredient Unit"
+          >
+            <option className="unit_placeholder" value="" hidden>
+              Unit
             </option>
-          ))}
-        </select>
-        <input
-          placeholder="Special Instructions (e.g., minced)"
-          id="special_instructions"
-          name="special_instructions"
-          maxLength="30"
-          value={el.special_instructions || ""}
-          onChange={e => this.handleChangeIngredients(e, i)}
-          className="ingredient_input"
-        />
-        <input
-          type="button"
-          value="Delete"
-          onClick={e => this.removeClick(e, i)}
-          className="remove_ingredient_button"
-        />
+            {units.sort(this.sortUnits).map(unit => (
+              <option className="unit_option" key={unit.id} value={unit.id}>
+                {unit.name}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="special_instructions" style={{ display: "none" }}>
+            Special Instructions
+          </label>
+          <input
+            placeholder="Special Instructions (e.g., minced)"
+            id="special_instructions"
+            name="special_instructions"
+            maxLength="30"
+            value={el.special_instructions || ""}
+            onChange={e => this.handleChangeIngredients(e, i)}
+            className="ingredient_input"
+            aria-label="Ingredient Special Instructions"
+          />
+          <input
+            type="button"
+            value="Delete"
+            onClick={e => this.removeClick(e, i)}
+            className="remove_ingredient_button"
+          />
+        </fieldset>
       </div>
     ));
   }
@@ -289,11 +311,15 @@ export default class AddRecipePage extends Component {
               maxLength="60"
               required
               className="recipe_name recipe_input"
+              aria-required="true"
+              aria-label="Recipe Name"
+              aria-describedby="nameError"
             />{" "}
             {/* displays validation error if input is invalid */}
             <ValidationError
               hasError={!this.state.nameValid}
               message={this.state.validationMessages.name}
+              id="nameError"
             />
             <label htmlFor="description" className="form_label">
               Description <Required />
@@ -304,10 +330,15 @@ export default class AddRecipePage extends Component {
               minLength="3"
               maxLength="1500"
               className="description recipe_input"
+              required
+              aria-required="true"
+              aria-label="Recipe Description"
+              aria-describedby="descriptionError"
             />
             <ValidationError
               hasError={!this.state.descriptionValid}
               message={this.state.validationMessages.description}
+              id="descriptionError"
             />
             <label htmlFor="instructions" className="form_label">
               Instructions <Required />
@@ -318,10 +349,15 @@ export default class AddRecipePage extends Component {
               minLength="3"
               maxLength="4000"
               className="instructions recipe_input"
+              required
+              aria-required="true"
+              aria-label="Recipe Instructions"
+              aria-describedby="instructionsError"
             />
             <ValidationError
               hasError={!this.state.instructionsValid}
               message={this.state.validationMessages.instructions}
+              id="instructionsError"
             />
             <label className="form_label">Ingredients</label>
             <div className="ingredients_section">
@@ -329,6 +365,7 @@ export default class AddRecipePage extends Component {
               <ValidationError
                 hasError={!this.state.quantityValid}
                 message={this.state.validationMessages.quantity}
+                id="ingredientError"
               />
             </div>
             <input

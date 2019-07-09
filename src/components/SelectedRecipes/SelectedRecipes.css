@@ -33,12 +33,10 @@
     width: 41px;
     height: 41px;
     font-size: 25px;
-    outline: none;
   }
   
   .remove_selected_button:hover, .add_selected_button:hover {
     background-color: #F03C05;
-    outline: none;
   }
 
   .recipe_select_buttons {

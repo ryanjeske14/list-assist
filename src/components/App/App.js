@@ -209,7 +209,7 @@ class App extends Component {
           <header>
             <Header />
           </header>
-          <main className="App">
+          <main className="App" role="main">
             <Switch>
               <Route exact path={"/"} component={LandingPage} />
               <Route path={"/recipes/:recipeId"} component={RecipePage} />
