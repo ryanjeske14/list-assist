@@ -20,7 +20,7 @@
 }
 
 .add_selected_button, .remove_selected_button {
-    background-color: #EE9300;
+    background-color: rgb(190, 44, 0);
     border-radius: 50%;
     border: none;
     font-size: 20px;
@@ -36,7 +36,7 @@
   }
   
   .remove_selected_button:hover, .add_selected_button:hover {
-    background-color: #F03C05;
+    background-color: #EE9300;
   }
 
   .recipe_select_buttons {

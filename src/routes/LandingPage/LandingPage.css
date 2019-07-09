@@ -2,7 +2,7 @@ body {
     font-family: "Open Sans",
     sans-serif; 
     font-size: 20px;
-    color: #444;
+    color: #3a3a3a;
     text-align: center;
     line-height: 1.5;
   }
@@ -30,7 +30,7 @@ body {
     padding: 0;
   }
 
-  .banner h2 {
+  .banner h1 {
     margin: auto;
     color: white;
     font-size: 25px;
@@ -41,13 +41,13 @@ body {
     margin-left: auto;
     margin-right: auto;
     border-radius: 3%;
-    background-color: #EE9300;
+    background-color: rgb(190, 44, 0);
     transition: all 0.3s ease-in-out;
     border: none;
   }
 
   .get_started:hover {
-    background-color: #F03C05;
+    background-color: #EE9300;
     color: white;
     cursor: pointer;
   }
@@ -87,7 +87,7 @@ body {
   }
 
   @media screen and (min-width: 520px) {
-    .banner h2 {
+    .banner h1 {
       font-size: 35px;
     }
     .landing_img {

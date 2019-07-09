@@ -16,7 +16,7 @@
     display: inline;
 }
 
-.recipe_section h3 {
+.recipe_section h2 {
     margin: 30px 0 0 0;
 }
 
@@ -42,7 +42,7 @@
 }
 
 .recipe_button, .edit_recipe_link {
-    background-color: #EE9300;
+    background-color: rgb(190, 44, 0);
     border-radius: 2px;
     border: none;
     font-size: 20px;
@@ -58,7 +58,7 @@
 }
 
 .recipe_button:hover, .edit_recipe_link:hover {
-    background-color: #F03C05;
+    background-color: #EE9300;
   }
 
 @media screen and (max-width: 750px) {  

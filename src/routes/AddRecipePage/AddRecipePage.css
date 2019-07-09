@@ -2,6 +2,10 @@
     margin: 0 15px;
   }
   
+  .add_recipe_header, .edit_recipe_header {
+    font-size: 25px;
+  }
+
   .recipe_inputs {
     display: flex;
     flex-direction: column;
@@ -14,7 +18,7 @@
   .ingredient_inputs {
     display: flex;
     flex-direction: column;
-    border: 1px solid #444;
+    border: 1px solid #3a3a3a;
     padding: 8px 10px 16px 10px;
     margin: 10px 0;
     align-items: center;
@@ -39,7 +43,7 @@
   }
 
   select.ingredient_input:invalid {
-      color: gray;
+      color: rgb(112, 112, 112);
   }
 
   .unit_option {
@@ -47,7 +51,7 @@
   }
 
   .add_ingredient_button, .remove_ingredient_button {
-    background-color: #EE9300;
+    background-color: rgb(190, 44, 0);
     border-radius: 2px;
     border: none;
     font-size: 20px;
@@ -59,6 +63,10 @@
     margin: 0 20px;
     text-decoration: none;
     font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .add_ingredient_button:hover, .remove_ingredient_button:hover {
+    background-color: #EE9300;
   }
 
   .remove_ingredient_button {
@@ -94,17 +102,22 @@
     font-size: 14px;
   }
 
-  .submit_button {
-    background-color: #444;
+  .submit_button, .cancel_button {
+    background-color: #3a3a3a;
     border-radius: 2px;
     border: none;
     font-size: 20px;
     padding: 8px 20px;
-    margin: 30px 0;
+    margin: 30px auto;
     color: white;
     cursor: pointer;
     transition: all 0.3s ease-in-out;
     width: 250px;
+    display: block;
+  }
+
+  .submit_button:hover, .cancel_button:hover {
+    background-color: #F03C05;
   }
 
   .submit_button:disabled {
@@ -113,7 +126,7 @@
     border: none;
     font-size: 20px;
     padding: 8px 20px;
-    margin: 30px 0;
+    margin: 30px auto;
     color: rgba(163, 163, 163, 0.76);
     transition: all 0.3s ease-in-out;
     width: 250px;

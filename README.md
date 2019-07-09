@@ -17,13 +17,13 @@ Guest users are limited to read-only access, but do have the ability to generate
 ## Screenshots
 
 ### Home Page:
-![home page](./public/screenshots/home_screen.png)
+![home page](./public/screenshots/home_page.png)
 
 ### Recipe Selection Screen:
-![recipes page](./public/screenshots/recipes_screen.png)
+![recipes selection screen](./public/screenshots/recipes_screen.png)
 
 ### Grocery List Screen: 
-![grocery list page](./public/screenshots/grocery_list_screen.png)
+![grocery list screen](./public/screenshots/grocery_list_screen.png)
 
 ### Recipe Screen:
 ![recipe page](./public/screenshots/recipe_screen.png)
@@ -39,6 +39,9 @@ Guest users are limited to read-only access, but do have the ability to generate
 
 ### Server-Side:
 - [List Assist API](https://github.com/ryanjeske14/list-assist-api)
+
+### Acknowledgments:
+- [Fraction.js](https://www.npmjs.com/package/fraction.js)
 
 
 

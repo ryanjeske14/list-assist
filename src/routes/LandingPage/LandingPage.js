@@ -10,8 +10,8 @@ export default class LandingPage extends Component {
   render() {
     return (
       <section className="landing">
-        <section role="banner" className="banner">
-          <h2>GROCERY LISTS MADE EASY</h2>
+        <section className="banner">
+          <h1>GROCERY LISTS MADE EASY</h1>
         </section>
 
         <section className="landing_section">

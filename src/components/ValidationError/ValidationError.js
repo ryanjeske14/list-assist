@@ -3,7 +3,11 @@ import PropTypes from "prop-types";
 import "./ValidationError.css";
 export default function ValidationError(props) {
   if (props.hasError) {
-    return <div className="error">{props.message}</div>;
+    return (
+      <div className="error" id={props.id}>
+        {props.message}
+      </div>
+    );
   }
 
   return <></>;

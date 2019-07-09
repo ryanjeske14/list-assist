@@ -17,7 +17,7 @@
 
 .recipe_link {
     text-decoration: none;
-    color: #444;
+    color: #3a3a3a;
     text-align: left
 }
 
@@ -27,7 +27,7 @@
 }
 
 .add_recipe_button {
-  background-color: #EE9300;
+  background-color: rgb(190, 44, 0);
   border-radius: 2px;
   border: none;
   font-size: 20px;
@@ -40,7 +40,7 @@
 }
 
 .add_recipe_button:hover {
-  background-color: #F03C05;
+  background-color: #EE9300;;
 }
 
 .selected_recipes_div {

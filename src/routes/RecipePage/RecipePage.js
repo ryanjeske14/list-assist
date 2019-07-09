@@ -33,13 +33,13 @@ export default class RecipePage extends Component {
     return (
       <section className="recipe_section">
         <h1 className="recipe_name">{recipe.name}</h1>
-        <h3>Description:</h3>
+        <h2>Description:</h2>
         <div className="recipe_description">
           {recipeDescription.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;
           })}
         </div>
-        <h3>Ingredients:</h3>
+        <h2>Ingredients:</h2>
         <ul className="ingredients_list">
           {ingredients.map((ingredient, i) => (
             <li key={i}>
@@ -50,7 +50,7 @@ export default class RecipePage extends Component {
             </li>
           ))}
         </ul>
-        <h3>Instructions:</h3>
+        <h2>Instructions:</h2>
         <div className="recipe_instructions">
           {recipeInstructions.split("\n").map((item, i) => {
             return <p key={i}>{item}</p>;

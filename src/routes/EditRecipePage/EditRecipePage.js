@@ -86,12 +86,12 @@ export default class EditRecipePage extends Component {
     return this.state.ingredients.map((el, i) => (
       <div className="ingredient_inputs" key={i}>
         <p className="ingredient_number">Ingredient {i + 1}</p>
-        <label htmlFor="name" style={{ display: "none" }}>
+        <label htmlFor={"name" + i} style={{ display: "none" }}>
           Name
         </label>
         <input
           placeholder="Ingredient"
-          id="name"
+          id={"name" + i}
           name="name"
           value={el.name || ""}
           onChange={e => this.handleChangeIngredients(e, i)}
@@ -101,12 +101,12 @@ export default class EditRecipePage extends Component {
           aria-required="true"
           aria-label="Ingredient Name"
         />
-        <label htmlFor="quantity" style={{ display: "none" }}>
+        <label htmlFor={"quantity" + i} style={{ display: "none" }}>
           Quantity
         </label>
         <input
           placeholder="Quantity"
-          id="quantity"
+          id={"quantity" + i}
           name="quantity"
           value={el.quantity || ""}
           onChange={e => this.handleChangeIngredients(e, i)}
@@ -115,14 +115,13 @@ export default class EditRecipePage extends Component {
           className="ingredient_input"
           aria-required="true"
           aria-label="Ingredient Quantity"
-          aria-describedby="ingredientError"
         />
-        <label htmlFor="unit_id" style={{ display: "none" }}>
+        <label htmlFor={"unit_id" + i} style={{ display: "none" }}>
           Unit
         </label>
         <select
           name="unit_id"
-          id="unit_id"
+          id={"unit_id" + i}
           value={el.unit_id || ""}
           onChange={e => this.handleChangeIngredients(e, i)}
           className="ingredient_input"
@@ -135,12 +134,12 @@ export default class EditRecipePage extends Component {
             </option>
           ))}
         </select>
-        <label htmlFor="special_instructions" style={{ display: "none" }}>
+        <label htmlFor={"special_instructions" + i} style={{ display: "none" }}>
           Special Instructions
         </label>
         <input
           placeholder="Special Instructions (e.g., minced)"
-          id="special_instructions"
+          id={"special_instructions" + i}
           name="special_instructions"
           maxLength="30"
           value={el.special_instructions || ""}
@@ -311,11 +310,17 @@ export default class EditRecipePage extends Component {
     this.props.history.push("/recipes");
   };
 
+  handleClickCancel = () => {
+    this.props.history.goBack();
+  };
+
   render() {
     const { name, description, instructions } = this.state;
     return (
       <section>
-        <h2>Edit your recipe using the form below:</h2>
+        <h1 className="edit_recipe_header">
+          Edit your recipe using the form below:
+        </h1>
         <form onSubmit={this.handleSubmit}>
           <div className="recipe_inputs">
             <label htmlFor="recipe-name-input" className="form_label">
@@ -332,7 +337,6 @@ export default class EditRecipePage extends Component {
               className="recipe_name recipe_input"
               aria-required="true"
               aria-label="Recipe Name"
-              aria-describedby="nameError"
             />
             {/* displays validation error if input is invalid */}
             <ValidationError
@@ -353,7 +357,6 @@ export default class EditRecipePage extends Component {
               required
               aria-required="true"
               aria-label="Recipe Description"
-              aria-describedby="descriptionError"
             />
             <ValidationError
               hasError={!this.state.descriptionValid}
@@ -373,7 +376,6 @@ export default class EditRecipePage extends Component {
               required
               aria-required="true"
               aria-label="Recipe Instructions"
-              aria-describedby="instructionsError"
             />
             <ValidationError
               hasError={!this.state.instructionsValid}
@@ -403,6 +405,9 @@ export default class EditRecipePage extends Component {
             className="submit_button"
           />
         </form>
+        <button className="cancel_button" onClick={this.handleClickCancel}>
+          Cancel
+        </button>
       </section>
     );
   }

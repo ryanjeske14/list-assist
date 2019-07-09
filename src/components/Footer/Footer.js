@@ -23,15 +23,20 @@ export default class RecipesList extends Component {
               href="https://github.com/ryanjeske14"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="github profile link"
             >
-              <i className="fab fa-github" />
+              <i className="fab fa-github" aria-hidden="true" />
             </a>
             <a
               href="https://www.linkedin.com/in/ryanjeske/"
               target="_blank"
               rel="noopener noreferrer"
+              aria-label="linkedin profile link"
             >
-              <i className="fab fa-linkedin" />
+              <i className="fab fa-linkedin" aria-hidden="true" />
+            </a>
+            <a href="mailto:ryanjeske@gmail.com" aria-label="email_link">
+              <i className="far fa-envelope" aria-hidden="true" />
             </a>
           </div>
         </div>

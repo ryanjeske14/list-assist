@@ -19,9 +19,9 @@ export default class RecipesPage extends Component {
     return (
       <section className="recipes_page">
         <div className="select_recipes_div">
-          <h2 className="recipes_page_header">
+          <h1 className="recipes_page_header">
             Select recipes to add to your grocery list:
-          </h2>
+          </h1>
           <RecipesList />
           <div className="ar_link_div">
             <Link className="add_recipe_link" to={`/add-recipe`}>
