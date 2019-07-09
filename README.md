@@ -1,22 +1,35 @@
 # LIST ASSIST
 
+## Description:
+
 A full stack web app that automates grocery list preparation by providing users with consolidated, system-generated grocery lists based on their selection from both default and custom recipes.
+
+## User Access:
+
+Registered users can view default recipes provided by the app, as well as create, read, update, and delete their own recipes, enabling them to generate grocery lists from both default and custom recipes. 
+
+Guest users are limited to read-only access, but do have the ability to generate grocery lists using the default recipes provided in the app.
 
 ## Demo:
 
-- [Live Demo](https://ryanjeske-list-assist.now.sh/)
+- [List Assist Live App](https://ryanjeske-list-assist.now.sh/)
 
 ## Screenshots
 
 ### Home Page:
+![home page](./public/screenshots/home_screen.png)
 
 ### Recipe Selection Screen:
+![recipes page](./public/screenshots/recipes_screen.png)
 
 ### Grocery List Screen: 
+![grocery list page](./public/screenshots/grocery_list_screen.png)
 
 ### Recipe Screen:
+![recipe page](./public/screenshots/recipe_screen.png)
 
 ### Add Recipe Screen:
+![add recipe page](./public/screenshots/add_recipe_screen.png)
 
 ## Build With
 
@@ -25,7 +38,6 @@ A full stack web app that automates grocery list preparation by providing users 
 * CSS3
 
 ### Server-Side:
-
 - [List Assist API](https://github.com/ryanjeske14/list-assist-api)
 
 

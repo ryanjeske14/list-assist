@@ -92,7 +92,12 @@ body {
     }
     .landing_img {
       width: 55%;
-      max-width: 400px;
+      max-width: 350px;
+    }
+    .landing_section p {
+      width: 80%;
+      max-width: 1020px;
+      margin: 20px auto 20px auto;
     }
   }
   

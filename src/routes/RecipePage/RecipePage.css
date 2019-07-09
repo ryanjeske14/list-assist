@@ -22,10 +22,16 @@
 
 .recipe_description p {
     margin-top: 10px;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .recipe_instructions p {
     margin: 10px 0;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .recipe_buttons {
