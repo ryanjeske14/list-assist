@@ -44,10 +44,12 @@ export default class Header extends Component {
   }
 
   render() {
+    const destination = this.context.loggedIn ? "/recipes" : "/";
+
     return (
       <nav className="Header">
         <div className="logo">
-          <Link to="/">
+          <Link to={destination}>
             <img src={logo} alt="logo" />
           </Link>
         </div>
